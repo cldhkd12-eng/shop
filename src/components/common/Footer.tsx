@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
           <FooterDesc>남녀 모두가 쓸 수 있는 향기, ScentAtelier</FooterDesc>
           <FooterInfo>
             ScentAtelier | 서울특별시 강남구 도산대로 123<br />
-            02-1234-5678 | cldhkd12@gmial.com
+            02-1234-5678 | cldhkd12@gmail.com
           </FooterInfo>
           <Copyright>© 2026 ScentAtelier. All rights reserved.</Copyright>
         </FooterLeft>

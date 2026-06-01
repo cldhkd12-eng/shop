@@ -431,7 +431,7 @@ export const Home: React.FC = () => {
                 <path d="M10 15L20 18" />
               </svg>
             </ServiceCard>
-            <ServiceText>Free UPS Ground shipping on all U.S. and Canada orders.</ServiceText>
+            <ServiceText>전 상품 무료 배송 (우체국택배 배송)</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
@@ -445,7 +445,7 @@ export const Home: React.FC = () => {
                 <path d="M50 35C57 22 70 22 58 35C72 28 70 42 50 35Z" />
               </svg>
             </ServiceCard>
-            <ServiceText>Free ScentAtelier Gift Boxes</ServiceText>
+            <ServiceText>ScentAtelier 기프트 패키지 무료 제공</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
@@ -457,12 +457,12 @@ export const Home: React.FC = () => {
                 <rect x="24" y="44" width="22" height="22" rx="2" />
                 <rect x="66" y="44" width="14" height="36" rx="2" />
                 <rect x="70" y="39" width="6" height="5" />
-                <circle cx="60" cy="34" r="1.5" fill="black" />
-                <circle cx="53" cy="38" r="1.5" fill="black" />
-                <circle cx="66" cy="26" r="1" fill="black" />
+                <circle cx="60" cy="34" r="1.5" fill="currentColor" />
+                <circle cx="53" cy="38" r="1.5" fill="currentColor" />
+                <circle cx="66" cy="26" r="1" fill="currentColor" />
               </svg>
             </ServiceCard>
-            <ServiceText>Fragrances - Try when you Buy</ServiceText>
+            <ServiceText>사전 시향 서비스 (시향 후 최종 구매)</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
@@ -470,7 +470,7 @@ export const Home: React.FC = () => {
               <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 25H48L42 75H28L22 25Z" />
                 <line x1="22" y1="32" x2="48" y2="32" />
-                <circle cx="35" cy="50" r="5" />
+                <circle cx="35" cy="50" r="5" fill="none" />
                 <rect x="58" y="35" width="11" height="40" rx="1.5" />
                 <rect x="73" y="35" width="11" height="40" rx="1.5" />
                 <line x1="58" y1="45" x2="69" y2="45" />
@@ -479,7 +479,7 @@ export const Home: React.FC = () => {
                 <path d="M63 25L57 19" />
               </svg>
             </ServiceCard>
-            <ServiceText>Two Free Samples with all orders</ServiceText>
+            <ServiceText>모든 주문 건 대상 무료 샘플 2종 동봉</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
@@ -493,7 +493,7 @@ export const Home: React.FC = () => {
                 <path d="M34 64V71H27" />
               </svg>
             </ServiceCard>
-            <ServiceText>Free Returns</ServiceText>
+            <ServiceText>안심 환불 및 무료 교환 서비스 제공</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
@@ -506,7 +506,7 @@ export const Home: React.FC = () => {
                 <path d="M22 94C32 92 48 90 64 82C75 76 78 66 74 60" />
               </svg>
             </ServiceCard>
-            <ServiceText>Welcome Gift: complimentary travel-size fragrance</ServiceText>
+            <ServiceText>신규 회원 전원 웰컴 미니어처 기프트 증정</ServiceText>
           </ServiceItem>
         </ServiceGrid>
       </ServiceSection>
