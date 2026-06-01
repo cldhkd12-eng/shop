@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScentAtelier — 향수 전문 이커머스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E293B;
+  --navy-light:#2D3F57;
+  --navy-dark:#0F1926;
+  --amber:#D97706;
+  --amber-light:#F59E0B;
+  --amber-pale:#FEF3C7;
+  --linen:#F8FAFC;
+  --linen-warm:#F1EDE6;
+  --white:#FFFFFF;
+  --gray-100:#F1F5F9;
+  --gray-200:#E2E8F0;
+  --gray-400:#94A3B8;
+  --gray-600:#64748B;
+  --gray-800:#334155;
+  --font-display:'Cormorant Garamond',serif;
+  --font-body:'DM Sans',sans-serif;
+  --r-sm:6px;
+  --r-md:12px;
+  --r-lg:20px;
+  --shadow-card:0 2px 20px rgba(30,41,59,0.08);
+  --shadow-float:0 8px 40px rgba(30,41,59,0.18);
+  --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--linen);color:var(--navy);min-height:100vh;font-size:15px}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:10px}
+
+/* ─── NAV ─── */
+.nav{position:sticky;top:0;z-index:100;background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:32px;height:64px}
+.logo{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--white);letter-spacing:0.04em;cursor:pointer;white-space:nowrap}
+.logo span{color:var(--amber)}
+.nav-tabs{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{padding:8px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:400;color:rgba(255,255,255,0.55);cursor:pointer;transition:var(--transition);white-space:nowrap;border:none;background:transparent}
+.nav-tab:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.06)}
+.nav-tab.active{color:var(--amber);background:rgba(217,119,6,0.12);font-weight:500}
+.nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.nav-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:rgba(255,255,255,0.6);cursor:pointer;transition:var(--transition);position:relative;font-size:18px}
+.nav-icon:hover{background:rgba(255,255,255,0.08);color:var(--white)}
+.nav-badge{position:absolute;top:4px;right:4px;width:16px;height:16px;border-radius:50%;background:var(--amber);color:var(--white);font-size:9px;font-weight:500;display:flex;align-items:center;justify-content:center;border:2px solid var(--navy)}
+.nav-btn{padding:7px 18px;border-radius:var(--r-sm);background:var(--amber);color:var(--white);font-size:13px;font-weight:500;border:none;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.nav-btn:hover{background:var(--amber-light)}
+
+/* ─── PAGE SECTIONS ─── */
+.page{display:none;animation:fadeUp 0.4s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── HERO ─── */
+.hero{background:var(--navy);position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 70% 50%,rgba(217,119,6,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(255,255,255,0.03) 0%,transparent 50%)}
+.hero-noise{position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-inner{max-width:1280px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;width:100%}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);margin-bottom:20px}
+.hero-title{font-family:var(--font-display);font-size:clamp(42px,5vw,72px);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:20px}
+.hero-title em{color:var(--amber);font-style:italic}
+.hero-desc{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.75;margin-bottom:36px;max-width:420px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{padding:13px 28px;background:var(--amber);color:var(--white);border:none;border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body);letter-spacing:0.02em}
+.btn-primary:hover{background:var(--amber-light);transform:translateY(-1px)}
+.btn-outline{padding:13px 28px;background:transparent;color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.2);border-radius:var(--r-sm);font-size:14px;font-weight:400;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.btn-outline:hover{border-color:rgba(255,255,255,0.5);color:var(--white)}
+.hero-visual{display:flex;justify-content:center;align-items:center;position:relative}
+.hero-bottle-wrap{position:relative}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(217,119,6,0.2)}
+.hero-ring:nth-child(1){width:320px;height:320px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ringPulse 4s ease-in-out infinite}
+.hero-ring:nth-child(2){width:420px;height:420px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ringPulse 4s ease-in-out 1s infinite;border-color:rgba(217,119,6,0.1)}
+@keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6}50%{transform:translate(-50%,-50%) scale(1.04);opacity:1}}
+.hero-bottle{width:220px;height:320px;position:relative;z-index:2}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hero-stat{}
+.hero-stat-num{font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--white)}
+.hero-stat-label{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.06em}
+
+/* ─── FILTER CHIPS ─── */
+.section{max-width:1280px;margin:0 auto;padding:56px 24px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.section-title{font-family:var(--font-display);font-size:32px;font-weight:400}
+.section-link{font-size:13px;color:var(--amber);cursor:pointer;text-decoration:none}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.chip{padding:8px 18px;border-radius:100px;font-size:13px;cursor:pointer;transition:var(--transition);border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);font-family:var(--font-body)}
+.chip:hover{border-color:var(--amber);color:var(--amber)}
+.chip.active{background:var(--navy);border-color:var(--navy);color:var(--white)}
+
+/* ─── PRODUCT GRID ─── */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.product-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-card)}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.product-card:hover .product-img-inner{transform:scale(1.04)}
+.product-img{background:var(--linen-warm);height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.product-img-inner{transition:transform 0.5s ease;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.product-badge{position:absolute;top:14px;left:14px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500}
+.badge-new{background:var(--navy);color:var(--white)}
+.badge-best{background:var(--amber);color:var(--white)}
+.badge-sale{background:#EF4444;color:var(--white)}
+.product-fav{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:var(--transition)}
+.product-fav:hover{background:var(--white);color:#EF4444}
+.product-info{padding:18px 20px}
+.product-brand{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+.product-name{font-family:var(--font-display);font-size:18px;font-weight:400;margin-bottom:4px;line-height:1.3}
+.product-scent{font-size:12px;color:var(--gray-400);margin-bottom:12px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-size:18px;font-weight:500;color:var(--navy)}
+.product-price span{font-size:12px;font-weight:400;color:var(--gray-400);text-decoration:line-through;margin-left:6px}
+.product-stars{font-size:12px;color:var(--amber)}
+.product-stars em{color:var(--gray-400);font-style:normal;margin-left:4px}
+
+/* ─── RANKING CAROUSEL ─── */
+.ranking-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
+.ranking-scroll::-webkit-scrollbar{display:none}
+.rank-card{flex:0 0 180px;background:var(--white);border-radius:var(--r-md);overflow:hidden;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-card);position:relative}
+.rank-card:hover{transform:translateY(-3px)}
+.rank-num{position:absolute;top:12px;left:12px;font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--navy);opacity:0.15;line-height:1}
+.rank-img{height:160px;background:var(--linen-warm);display:flex;align-items:center;justify-content:center}
+.rank-info{padding:12px}
+.rank-name{font-family:var(--font-display);font-size:14px;font-weight:400;margin-bottom:2px}
+.rank-price{font-size:13px;color:var(--amber);font-weight:500}
+
+/* ─── BANNER ─── */
+.banner-section{background:var(--navy);margin:0}
+.banner-inner{max-width:1280px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.banner-tag{display:inline-block;padding:4px 12px;border:1px solid rgba(217,119,6,0.5);border-radius:100px;font-size:11px;letter-spacing:0.1em;color:var(--amber);margin-bottom:18px}
+.banner-title{font-family:var(--font-display);font-size:40px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:16px}
+.banner-desc{color:rgba(255,255,255,0.5);font-size:14px;line-height:1.8;margin-bottom:28px}
+.scent-note-chart{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-md);padding:24px}
+.note-row{margin-bottom:16px}
+.note-label{display:flex;justify-content:space-between;margin-bottom:8px}
+.note-name{font-size:12px;color:rgba(255,255,255,0.6);letter-spacing:0.06em}
+.note-ingredients{font-size:12px;color:rgba(255,255,255,0.4)}
+.note-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.note-fill{height:100%;border-radius:100px;transition:width 1s ease}
+.fill-top{background:linear-gradient(90deg,var(--amber-light),var(--amber))}
+.fill-mid{background:linear-gradient(90deg,#8B5CF6,#A78BFA)}
+.fill-base{background:linear-gradient(90deg,#1E3A5F,#2D6A9F)}
+
+/* ─── PRODUCT DETAIL PAGE ─── */
+.detail-layout{max-width:1280px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.detail-gallery{position:sticky;top:84px}
+.detail-main-img{background:var(--linen-warm);border-radius:var(--r-lg);height:480px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.detail-thumbs{display:flex;gap:10px}
+.detail-thumb{width:72px;height:72px;background:var(--linen-warm);border-radius:var(--r-sm);cursor:pointer;border:2px solid transparent;transition:var(--transition);display:flex;align-items:center;justify-content:center;font-size:24px}
+.detail-thumb.active{border-color:var(--amber)}
+.detail-brand{font-size:11px;letter-spacing:0.12em;color:var(--amber);text-transform:uppercase;margin-bottom:6px}
+.detail-name{font-family:var(--font-display);font-size:42px;font-weight:300;line-height:1.15;margin-bottom:8px}
+.detail-sub{font-size:14px;color:var(--gray-600);margin-bottom:20px}
+.detail-rating{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.stars-lg{color:var(--amber);font-size:16px;letter-spacing:2px}
+.review-count{font-size:13px;color:var(--gray-400)}
+.detail-price{font-family:var(--font-display);font-size:36px;font-weight:400;margin-bottom:28px}
+.detail-price-orig{font-size:16px;color:var(--gray-400);text-decoration:line-through;margin-left:8px}
+.detail-price-tag{font-size:13px;background:var(--amber-pale);color:var(--amber);padding:3px 10px;border-radius:100px;margin-left:8px}
+.option-label{font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--gray-600);margin-bottom:10px;text-transform:uppercase}
+.option-chips{display:flex;gap:8px;margin-bottom:24px}
+.opt-chip{padding:8px 16px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;cursor:pointer;transition:var(--transition)}
+.opt-chip:hover{border-color:var(--navy)}
+.opt-chip.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.qty-btn{width:36px;height:36px;border:1px solid var(--gray-200);border-radius:var(--r-sm);background:var(--white);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+.qty-btn:hover{border-color:var(--navy)}
+.qty-num{font-size:18px;font-weight:500;min-width:28px;text-align:center}
+.sticky-bar{background:var(--white);border-top:1px solid var(--gray-200);padding:16px 24px;display:flex;gap:12px;align-items:center}
+.sticky-info{flex:1}
+.sticky-name{font-size:14px;font-weight:500}
+.sticky-price{font-size:13px;color:var(--amber)}
+.btn-cart{flex:1;padding:14px;border:2px solid var(--navy);background:var(--white);color:var(--navy);border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.btn-cart:hover{background:var(--navy);color:var(--white)}
+.btn-buy{flex:2;padding:14px;background:var(--amber);color:var(--white);border:2px solid var(--amber);border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.btn-buy:hover{background:var(--amber-light);border-color:var(--amber-light)}
+.review-section{border-top:1px solid var(--gray-200);padding-top:40px;margin-top:40px}
+.review-summary{display:flex;gap:32px;align-items:center;margin-bottom:32px;flex-wrap:wrap}
+.review-big-num{font-family:var(--font-display);font-size:64px;font-weight:300;color:var(--navy);line-height:1}
+.review-big-stars{color:var(--amber);font-size:20px;margin-bottom:4px}
+.review-total{font-size:13px;color:var(--gray-400)}
+.review-bars{flex:1;min-width:180px}
+.review-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.review-bar-label{font-size:12px;color:var(--gray-400);min-width:20px;text-align:right}
+.review-bar-track{flex:1;height:5px;background:var(--gray-100);border-radius:100px;overflow:hidden}
+.review-bar-fill{height:100%;background:var(--amber);border-radius:100px}
+.photo-reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.photo-slot{aspect-ratio:1;background:var(--linen-warm);border-radius:var(--r-sm);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:var(--transition)}
+.photo-slot:hover{opacity:0.85}
+.review-card{border:1px solid var(--gray-200);border-radius:var(--r-md);padding:20px;margin-bottom:12px}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.reviewer-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.reviewer-name{font-size:14px;font-weight:500}
+.reviewer-date{font-size:12px;color:var(--gray-400)}
+.review-text{font-size:14px;color:var(--gray-600);line-height:1.7}
+
+/* ─── CART PAGE ─── */
+.cart-layout{max-width:1280px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+.vendor-group{background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:20px}
+.vendor-head{padding:16px 20px;background:var(--navy);display:flex;align-items:center;gap:10px}
+.vendor-name-tag{font-size:13px;color:rgba(255,255,255,0.8);font-weight:400}
+.vendor-ship{font-size:12px;color:rgba(255,255,255,0.4);margin-left:auto}
+.cart-item{padding:20px;display:flex;gap:16px;align-items:start;border-bottom:1px solid var(--gray-100)}
+.cart-item:last-child{border-bottom:none}
+.cart-item-img{width:80px;height:80px;background:var(--linen-warm);border-radius:var(--r-sm);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:32px}
+.cart-item-info{flex:1}
+.cart-item-brand{font-size:11px;letter-spacing:0.08em;color:var(--amber);text-transform:uppercase;margin-bottom:2px}
+.cart-item-name{font-family:var(--font-display);font-size:17px;margin-bottom:2px}
+.cart-item-opt{font-size:12px;color:var(--gray-400)}
+.cart-item-right{text-align:right;min-width:100px}
+.cart-item-price{font-size:17px;font-weight:500;margin-bottom:8px}
+.cart-qty{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.cqb{width:28px;height:28px;border:1px solid var(--gray-200);border-radius:var(--r-sm);background:var(--white);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.cqb:hover{border-color:var(--navy)}
+.cqn{font-size:13px;min-width:18px;text-align:center}
+.cart-del{color:var(--gray-400);font-size:12px;cursor:pointer;margin-top:6px;display:block}
+.cart-del:hover{color:#EF4444}
+
+/* ─── SUMMARY BOX ─── */
+.summary-box{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-card);position:sticky;top:84px;overflow:hidden}
+.summary-head{background:var(--navy);padding:20px;color:var(--white)}
+.summary-head-title{font-family:var(--font-display);font-size:20px;font-weight:400}
+.summary-body{padding:20px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:14px}
+.summary-row:last-of-type{border-bottom:none}
+.summary-row .label{color:var(--gray-600)}
+.summary-row .val{font-weight:500}
+.summary-row .val.discount{color:#EF4444}
+.summary-total{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:2px solid var(--navy);margin-top:8px}
+.total-label{font-size:13px;color:var(--gray-600)}
+.total-val{font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--navy)}
+.toss-btn{display:block;width:100%;padding:16px;background:#3182F6;color:var(--white);border:none;border-radius:var(--r-sm);font-size:15px;font-weight:500;cursor:pointer;transition:var(--transition);margin-top:16px;font-family:var(--font-body);text-align:center}
+.toss-btn:hover{background:#1D6FDB}
+.toss-logo{display:flex;align-items:center;justify-content:center;gap:8px}
+.toss-badge{background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:600}
+.delivery-form{border:1px solid var(--gray-200);border-radius:var(--r-md);padding:16px;margin-bottom:16px}
+.delivery-title{font-size:13px;font-weight:500;margin-bottom:12px;color:var(--gray-800)}
+.form-field{margin-bottom:10px}
+.form-field label{display:block;font-size:11px;color:var(--gray-400);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em}
+.form-field input{width:100%;padding:8px 12px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;font-family:var(--font-body);outline:none;transition:var(--transition)}
+.form-field input:focus{border-color:var(--amber)}
+
+/* ─── VENDOR ADMIN ─── */
+.admin-layout{max-width:1280px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:220px 1fr;gap:32px}
+.admin-sidebar{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-card);overflow:hidden;height:fit-content;position:sticky;top:84px}
+.sidebar-head{padding:20px;background:var(--navy)}
+.sidebar-logo{font-family:var(--font-display);font-size:16px;color:var(--white);font-weight:400}
+.sidebar-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.sidebar-menu{padding:12px 0}
+.sidebar-item{padding:10px 20px;font-size:13px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:10px;color:var(--gray-600)}
+.sidebar-item:hover{background:var(--gray-100);color:var(--navy)}
+.sidebar-item.active{background:rgba(217,119,6,0.08);color:var(--amber);border-right:3px solid var(--amber);font-weight:500}
+.sidebar-icon{font-size:16px;opacity:0.7}
+.admin-main{}
+.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat-card{background:var(--white);border-radius:var(--r-md);padding:20px;box-shadow:var(--shadow-card);position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.stat-card.s-blue::before{background:#3182F6}
+.stat-card.s-amber::before{background:var(--amber)}
+.stat-card.s-green::before{background:#10B981}
+.stat-card.s-red::before{background:#EF4444}
+.stat-label{font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.stat-num{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--navy)}
+.stat-change{font-size:12px;margin-top:4px}
+.stat-change.up{color:#10B981}
+.stat-change.down{color:#EF4444}
+.admin-card{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-card);margin-bottom:24px;overflow:hidden}
+.admin-card-head{padding:18px 24px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between}
+.admin-card-title{font-size:15px;font-weight:500}
+.admin-card-body{padding:0}
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{padding:10px 20px;text-align:left;font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.06em;font-weight:500;border-bottom:1px solid var(--gray-100)}
+.data-table td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--gray-100);vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--gray-100)}
+.status-badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500}
+.s-new{background:#EFF6FF;color:#1D4ED8}
+.s-prep{background:#FEF3C7;color:#92400E}
+.s-ship{background:#ECFDF5;color:#065F46}
+.s-done{background:#F1F5F9;color:#475569}
+.action-btn{padding:5px 12px;border-radius:var(--r-sm);font-size:12px;border:1px solid var(--gray-200);background:var(--white);cursor:pointer;font-family:var(--font-body);transition:var(--transition)}
+.action-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.product-form{padding:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:500;color:var(--gray-600);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;font-family:var(--font-body);outline:none;transition:var(--transition);background:var(--white)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(217,119,6,0.08)}
+.tax-table{padding:24px}
+.tax-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--gray-100);font-size:13px}
+.tax-row:last-child{border-bottom:none}
+.tax-btn{padding:6px 14px;border-radius:var(--r-sm);background:var(--amber);color:var(--white);border:none;font-size:12px;cursor:pointer;font-family:var(--font-body)}
+
+/* ─── SUPER ADMIN ─── */
+.sa-header{background:var(--navy-dark);padding:0 24px}
+.sa-header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:24px;height:56px}
+.sa-logo{font-family:var(--font-display);font-size:18px;color:var(--white);font-weight:400}
+.sa-logo span{color:var(--amber);font-size:12px;border:1px solid var(--amber);border-radius:4px;padding:1px 6px;font-family:var(--font-body);font-weight:500;margin-left:8px;letter-spacing:0.06em}
+.sa-nav{display:flex;gap:2px;margin-left:auto}
+.sa-nav-item{padding:6px 14px;border-radius:var(--r-sm);font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;transition:var(--transition)}
+.sa-nav-item:hover{color:var(--white);background:rgba(255,255,255,0.06)}
+.sa-nav-item.active{color:var(--amber);background:rgba(217,119,6,0.1)}
+.sa-body{max-width:1280px;margin:0 auto;padding:32px 24px}
+.sa-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.sa-stat{background:var(--white);border-radius:var(--r-md);padding:20px 24px;box-shadow:var(--shadow-card)}
+.sa-stat-icon{font-size:24px;margin-bottom:10px}
+.sa-stat-num{font-family:var(--font-display);font-size:36px;font-weight:300;color:var(--navy)}
+.sa-stat-label{font-size:12px;color:var(--gray-400);margin-top:2px}
+.sa-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.sa-grid-full{grid-column:1/-1}
+.report-item{display:flex;align-items:start;gap:14px;padding:16px;border-bottom:1px solid var(--gray-100);transition:var(--transition)}
+.report-item:hover{background:var(--gray-100)}
+.report-type{width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.rt-review{background:#FEF3C7;color:#92400E}
+.rt-inquiry{background:#EFF6FF;color:#1D4ED8}
+.rt-product{background:#FCE7F3;color:#9D174D}
+.report-content{flex:1}
+.report-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.report-meta{font-size:12px;color:var(--gray-400)}
+.report-action{display:flex;gap:6px;flex-shrink:0}
+.blind-btn{padding:5px 10px;border-radius:var(--r-sm);font-size:11px;background:#FEF3C7;color:#92400E;border:none;cursor:pointer;font-family:var(--font-body)}
+.pass-btn{padding:5px 10px;border-radius:var(--r-sm);font-size:11px;background:var(--gray-100);color:var(--gray-600);border:none;cursor:pointer;font-family:var(--font-body)}
+.vendor-row{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--gray-100);transition:var(--transition)}
+.vendor-row:hover{background:var(--gray-100)}
+.vendor-avatar{width:38px;height:38px;border-radius:var(--r-sm);background:var(--navy);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.vendor-info{flex:1}
+.vendor-biz{font-size:13px;font-weight:500}
+.vendor-email{font-size:12px;color:var(--gray-400)}
+.approve-btn{padding:6px 14px;border-radius:var(--r-sm);background:#ECFDF5;color:#065F46;border:none;font-size:12px;cursor:pointer;margin-right:6px;font-family:var(--font-body);transition:var(--transition)}
+.approve-btn:hover{background:#10B981;color:var(--white)}
+.reject-btn{padding:6px 14px;border-radius:var(--r-sm);background:#FEF2F2;color:#991B1B;border:none;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:var(--transition)}
+.reject-btn:hover{background:#EF4444;color:var(--white)}
+.editor-area{padding:20px}
+.editor-toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:10px;border:1px solid var(--gray-200);border-bottom:none;border-radius:var(--r-sm) var(--r-sm) 0 0;background:var(--gray-100)}
+.tb-btn{padding:5px 9px;border:none;background:var(--white);border-radius:4px;font-size:13px;cursor:pointer;transition:var(--transition)}
+.tb-btn:hover{background:var(--gray-200)}
+.editor-content{border:1px solid var(--gray-200);border-radius:0 0 var(--r-sm) var(--r-sm);min-height:140px;padding:14px;font-size:13px;line-height:1.7;color:var(--gray-800);outline:none}
+.editor-content:focus{border-color:var(--amber)}
+.pub-btn{display:inline-block;margin-top:12px;padding:10px 24px;background:var(--navy);color:var(--white);border:none;border-radius:var(--r-sm);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-body);transition:var(--transition)}
+.pub-btn:hover{background:var(--navy-light)}
+
+/* ─── PAGE HEADER ─── */
+.page-header{background:var(--white);border-bottom:1px solid var(--gray-200);padding:32px 24px 0}
+.page-header-inner{max-width:1280px;margin:0 auto}
+.page-breadcrumb{font-size:12px;color:var(--gray-400);margin-bottom:8px}
+.page-breadcrumb span{color:var(--gray-600)}
+.page-h1{font-family:var(--font-display);font-size:32px;font-weight:300;margin-bottom:24px}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--white);padding:14px 20px;border-radius:var(--r-md);font-size:13px;display:none;align-items:center;gap:10px;z-index:999;box-shadow:var(--shadow-float);animation:toastIn 0.3s ease}
+.toast.show{display:flex}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.toast-icon{font-size:16px}
+
+/* ─── FOOTER ─── */
+footer{background:var(--navy-dark);color:rgba(255,255,255,0.4);padding:40px 24px;font-size:12px;margin-top:64px}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:24px}
+.footer-brand{font-family:var(--font-display);font-size:18px;color:var(--white);margin-bottom:8px}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-link{cursor:pointer;transition:var(--transition)}
+.footer-link:hover{color:var(--amber)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-visual{display:none}
+  .detail-layout{grid-template-columns:1fr}
+  .detail-gallery{position:static}
+  .cart-layout{grid-template-columns:1fr}
+  .summary-box{position:static}
+  .admin-layout{grid-template-columns:1fr}
+  .admin-sidebar{position:static}
+  .sa-grid{grid-template-columns:1fr}
+  .stat-cards,.sa-stats{grid-template-columns:repeat(2,1fr)}
+  .banner-inner{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .nav-inner{padding:0 16px;gap:16px}
+  .section{padding:40px 16px}
+  .stat-cards,.sa-stats{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column}
+  .hero-stats{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">Scent<span>Atelier</span></div>
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showPage('home')">🏠 메인</div>
+      <div class="nav-tab" onclick="showPage('detail')">🍾 상품 상세</div>
+      <div class="nav-tab" onclick="showPage('cart')">🛒 장바구니</div>
+      <div class="nav-tab" onclick="showPage('vendor')">📊 입점사 어드민</div>
+      <div class="nav-tab" onclick="showPage('superadmin')">⚙️ 슈퍼 어드민</div>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-icon" onclick="showPage('cart')">🛒<span class="nav-badge">3</span></div>
+      <div class="nav-icon">♡</div>
+      <button class="nav-btn">카카오 로그인</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ PAGE: HOME ═══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">향수 전문 이커머스 플랫폼</div>
+        <h1 class="hero-title">향수가<br><em>예술</em>이 되는<br>공간</h1>
+        <p class="hero-desc">조향사의 아틀리에에서 영감을 받은 큐레이션. 세계 최고의 향수 브랜드를 한 곳에서 만나보세요.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('detail')">향수 탐색하기</button>
+          <button class="btn-outline">입점 신청</button>
+        </div>
+        <div class="hero-stats" style="margin-top:40px">
+          <div class="hero-stat">
+            <div class="hero-stat-num">1,240+</div>
+            <div class="hero-stat-label">등록 향수</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">320</div>
+            <div class="hero-stat-label">입점 브랜드</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4.8★</div>
+            <div class="hero-stat-label">평균 만족도</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-bottle-wrap">
+          <div class="hero-ring"></div>
+          <div class="hero-ring"></div>
+          <svg class="hero-bottle" viewBox="0 0 220 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bottleGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2D3F57"/>
+                <stop offset="100%" stop-color="#1E293B"/>
+              </linearGradient>
+              <linearGradient id="glassShine" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+                <stop offset="40%" stop-color="rgba(255,255,255,0.05)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+              <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D97706" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#92400E" stop-opacity="0.9"/>
+              </linearGradient>
+            </defs>
+            <rect x="30" y="100" width="160" height="200" rx="14" fill="url(#bottleGrad)"/>
+            <rect x="30" y="180" width="160" height="120" rx="0"/>
+            <clipPath id="bottleClip"><rect x="30" y="100" width="160" height="200" rx="14"/></clipPath>
+            <rect x="30" y="200" width="160" height="100" fill="url(#liquidGrad)" clip-path="url(#bottleClip)"/>
+            <rect x="30" y="100" width="60" height="200" rx="14" fill="url(#glassShine)" clip-path="url(#bottleClip)"/>
+            <rect x="82" y="56" width="56" height="52" rx="6" fill="url(#bottleGrad)"/>
+            <rect x="72" y="30" width="76" height="34" rx="8" fill="#D97706"/>
+            <rect x="72" y="30" width="76" height="10" rx="8" fill="#F59E0B"/>
+            <rect x="107" y="18" width="6" height="16" rx="3" fill="#D97706"/>
+            <rect x="100" y="12" width="20" height="8" rx="4" fill="#D97706"/>
+            <rect x="50" y="140" width="120" height="80" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <text x="110" y="168" text-anchor="middle" font-family="Cormorant Garamond" font-size="14" fill="rgba(255,255,255,0.9)" font-weight="300" letter-spacing="3">SCENT</text>
+            <text x="110" y="190" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" fill="#D97706" font-weight="400" letter-spacing="2">Atelier</text>
+            <text x="110" y="208" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.3)" letter-spacing="4">EAU DE PARFUM</text>
+            <circle cx="68" cy="168" r="2" fill="rgba(217,119,6,0.4)"/>
+            <circle cx="152" cy="168" r="2" fill="rgba(217,119,6,0.4)"/>
+            <rect x="30" y="296" width="160" height="4" rx="2" fill="rgba(217,119,6,0.15)" clip-path="url(#bottleClip)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING -->
+  <section class="section" style="padding-bottom:0">
+    <div class="section-head">
+      <h2 class="section-title">실시간 베스트 🔥</h2>
+      <a class="section-link">전체보기 →</a>
+    </div>
+    <div class="ranking-scroll">
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img"><svg width="70" height="100" viewBox="0 0 70 100"><rect x="15" y="20" width="40" height="65" rx="6" fill="#2D3F57"/><rect x="24" y="10" width="22" height="16" rx="4" fill="#2D3F57"/><rect x="20" y="4" width="30" height="10" rx="5" fill="#D97706"/><rect x="15" y="55" width="40" height="30" rx="0" fill="rgba(217,119,6,0.3)" clip-path="inset(0 0 0 0 round 0 0 6px 6px)"/></svg></div>
+        <div class="rank-num">1</div>
+        <div class="rank-info">
+          <div class="rank-name">Santal 33</div>
+          <div class="rank-price">₩248,000</div>
+        </div>
+      </div>
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img" style="background:#EDE9FE"><svg width="60" height="100" viewBox="0 0 60 100"><rect x="10" y="28" width="40" height="60" rx="20" fill="#7C3AED" opacity="0.7"/><rect x="18" y="12" width="24" height="20" rx="4" fill="#7C3AED" opacity="0.6"/><rect x="16" y="6" width="28" height="10" rx="5" fill="#D97706"/></svg></div>
+        <div class="rank-num">2</div>
+        <div class="rank-info">
+          <div class="rank-name">Black Opium</div>
+          <div class="rank-price">₩195,000</div>
+        </div>
+      </div>
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img" style="background:#FEF9EC"><svg width="60" height="100" viewBox="0 0 60 100"><rect x="10" y="25" width="40" height="65" rx="4" fill="#D97706" opacity="0.6"/><rect x="18" y="12" width="24" height="16" rx="4" fill="#D97706" opacity="0.5"/><rect x="14" y="5" width="32" height="10" rx="5" fill="#1E293B"/></svg></div>
+        <div class="rank-num">3</div>
+        <div class="rank-info">
+          <div class="rank-name">Libre</div>
+          <div class="rank-price">₩182,000</div>
+        </div>
+      </div>
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img" style="background:#E0F2FE"><svg width="55" height="100" viewBox="0 0 55 100"><ellipse cx="27" cy="65" rx="22" ry="28" fill="#0284C7" opacity="0.5"/><rect x="18" y="22" width="18" height="20" rx="4" fill="#0284C7" opacity="0.6"/><rect x="15" y="14" width="24" height="10" rx="5" fill="#D97706"/></svg></div>
+        <div class="rank-num">4</div>
+        <div class="rank-info">
+          <div class="rank-name">Bleu de Chanel</div>
+          <div class="rank-price">₩220,000</div>
+        </div>
+      </div>
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img" style="background:#FDF2F8"><svg width="58" height="100" viewBox="0 0 58 100"><rect x="9" y="28" width="40" height="62" rx="10" fill="#DB2777" opacity="0.4"/><rect x="17" y="14" width="24" height="17" rx="6" fill="#DB2777" opacity="0.5"/><rect x="15" y="7" width="28" height="10" rx="5" fill="#D97706"/></svg></div>
+        <div class="rank-num">5</div>
+        <div class="rank-info">
+          <div class="rank-name">Miss Dior</div>
+          <div class="rank-price">₩176,000</div>
+        </div>
+      </div>
+      <div class="rank-card" onclick="showPage('detail')">
+        <div class="rank-img" style="background:#F0FDF4"><svg width="60" height="100" viewBox="0 0 60 100"><rect x="10" y="30" width="40" height="60" rx="8" fill="#059669" opacity="0.5"/><rect x="18" y="16" width="24" height="17" rx="5" fill="#059669" opacity="0.4"/><rect x="16" y="8" width="28" height="10" rx="5" fill="#D97706"/></svg></div>
+        <div class="rank-num">6</div>
+        <div class="rank-info">
+          <div class="rank-name">Aventus</div>
+          <div class="rank-price">₩380,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">향수 컬렉션</h2>
+      <a class="section-link">1,240개 전체보기 →</a>
+    </div>
+
+    <!-- FILTER CHIPS -->
+    <div class="filter-row">
+      <div class="chip active" onclick="filterChip(this)">전체</div>
+      <div class="chip" onclick="filterChip(this)">🌲 우디</div>
+      <div class="chip" onclick="filterChip(this)">🌸 플로럴</div>
+      <div class="chip" onclick="filterChip(this)">🍋 시트러스</div>
+      <div class="chip" onclick="filterChip(this)">🌊 아쿠아틱</div>
+      <div class="chip" onclick="filterChip(this)">🍯 오리엔탈</div>
+      <div class="chip" onclick="filterChip(this)">🫧 파우더리</div>
+      <div class="chip" onclick="filterChip(this)">🖤 고급향</div>
+      <div class="chip" onclick="filterChip(this)">💫 신상품</div>
+      <div class="chip" onclick="filterChip(this)">🔥 베스트</div>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" onclick="showPage('detail')">
+        <div class="product-img">
+          <div class="product-img-inner">
+            <svg width="90" height="150" viewBox="0 0 90 150"><rect x="15" y="35" width="60" height="100" rx="8" fill="#1E293B"/><rect x="28" y="16" width="34" height="25" rx="5" fill="#1E293B"/><rect x="24" y="8" width="42" height="12" rx="6" fill="#D97706"/><rect x="15" y="95" width="60" height="40" rx="0" fill="rgba(217,119,6,0.35)"/><rect x="24" y="60" width="42" height="32" rx="3" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/><text x="45" y="74" text-anchor="middle" font-family="Cormorant Garamond" font-size="8" fill="rgba(255,255,255,0.7)">SANTAL</text><text x="45" y="86" text-anchor="middle" font-family="Cormorant Garamond" font-size="6" fill="#D97706">Le Labo</text></svg>
+          </div>
+          <span class="product-badge badge-best">BEST</span>
+          <span class="product-fav">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Le Labo</div>
+          <div class="product-name">Santal 33</div>
+          <div class="product-scent">우디 · 샌달우드 · 머스크</div>
+          <div class="product-bottom">
+            <div class="product-price">₩248,000 <span>₩280,000</span></div>
+            <div class="product-stars">★★★★★ <em>4.9</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="showPage('detail')">
+        <div class="product-img" style="background:#EDE9FE">
+          <div class="product-img-inner">
+            <svg width="80" height="140" viewBox="0 0 80 140"><rect x="10" y="38" width="60" height="90" rx="30" fill="#7C3AED" opacity="0.6"/><rect x="22" y="18" width="36" height="24" rx="6" fill="#7C3AED" opacity="0.5"/><rect x="18" y="10" width="44" height="12" rx="6" fill="#D97706"/><rect x="36" y="5" width="8" height="8" rx="4" fill="#D97706"/></svg>
+          </div>
+          <span class="product-badge badge-new">NEW</span>
+          <span class="product-fav">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Yves Saint Laurent</div>
+          <div class="product-name">Black Opium</div>
+          <div class="product-scent">오리엔탈 · 바닐라 · 커피</div>
+          <div class="product-bottom">
+            <div class="product-price">₩195,000</div>
+            <div class="product-stars">★★★★☆ <em>4.7</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="showPage('detail')">
+        <div class="product-img" style="background:#FDF2F8">
+          <div class="product-img-inner">
+            <svg width="85" height="145" viewBox="0 0 85 145"><rect x="12" y="38" width="61" height="95" rx="6" fill="#DB2777" opacity="0.4"/><rect x="23" y="16" width="39" height="26" rx="5" fill="#DB2777" opacity="0.35"/><rect x="20" y="8" width="45" height="12" rx="6" fill="#D97706"/><circle cx="42" cy="95" r="18" fill="rgba(219,39,119,0.2)"/></svg>
+          </div>
+          <span class="product-badge badge-sale">SALE</span>
+          <span class="product-fav">❤</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Dior</div>
+          <div class="product-name">Miss Dior Blooming</div>
+          <div class="product-scent">플로럴 · 피오니 · 로즈</div>
+          <div class="product-bottom">
+            <div class="product-price">₩155,000 <span>₩190,000</span></div>
+            <div class="product-stars">★★★★★ <em>4.8</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="showPage('detail')">
+        <div class="product-img" style="background:#E0F2FE">
+          <div class="product-img-inner">
+            <svg width="80" height="145" viewBox="0 0 80 145"><rect x="10" y="35" width="60" height="98" rx="10" fill="#0284C7" opacity="0.5"/><rect x="22" y="16" width="36" height="23" rx="5" fill="#0284C7" opacity="0.4"/><rect x="18" y="8" width="44" height="12" rx="6" fill="#1E293B"/><rect x="18" y="85" width="44" height="2" rx="1" fill="rgba(255,255,255,0.3)"/></svg>
+          </div>
+          <span class="product-fav">♡</span>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Chanel</div>
+          <div class="product-name">Bleu de Chanel EDP</div>
+          <div class="product-scent">시트러스 · 시더 · 우디 아로마틱</div>
+          <div class="product-bottom">
+            <div class="product-price">₩220,000</div>
+            <div class="product-stars">★★★★★ <em>4.9</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER -->
+  <section class="section banner-section">
+    <div class="banner-inner">
+      <div>
+        <span class="banner-tag">SIGNATURE SCENT</span>
+        <h2 class="banner-title">조향사의 아틀리에에서<br>탄생한 시그니처 향수</h2>
+        <p class="banner-desc">천연 원료의 섬세한 배합으로 완성된 특별한 컬렉션. 센트아틀리에가 제안하는 시그니처 노트의 깊이를 느껴보세요.</p>
+        <button class="btn-primary" style="background:var(--amber)" onclick="showPage('detail')">시그니처 향수 보기</button>
+      </div>
+      <div class="scent-note-chart">
+        <div class="note-row">
+          <div class="note-label"><span class="note-name">Top Note</span><span class="note-ingredients">버가못, 핑크 페퍼 (70%)</span></div>
+          <div class="note-bar"><div class="note-fill fill-top" style="width:70%"></div></div>
+        </div>
+        <div class="note-row">
+          <div class="note-label"><span class="note-name">Middle Note</span><span class="note-ingredients">아이리스, 바이올렛 (85%)</span></div>
+          <div class="note-bar"><div class="note-fill fill-mid" style="width:85%"></div></div>
+        </div>
+        <div class="note-row" style="margin-bottom:0">
+          <div class="note-label"><span class="note-name">Base Note</span><span class="note-ingredients">샌달우드, 머스크 (92%)</span></div>
+          <div class="note-bar"><div class="note-fill fill-base" style="width:92%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE: DETAIL ═══════════════════════ -->
+<div class="page" id="page-detail">
+  <div class="detail-layout">
+    <!-- Gallery -->
+    <div class="detail-gallery">
+      <div class="detail-main-img">
+        <svg width="150" height="240" viewBox="0 0 150 240" fill="none"><rect x="20" y="70" width="110" height="150" rx="10" fill="#2D3F57"/><rect x="55" y="30" width="40" height="40" rx="6" fill="#2D3F57"/><rect x="45" y="10" width="60" height="20" rx="4" fill="#D97706"/></svg>
+      </div>
+      <div class="detail-thumbs">
+        <div class="detail-thumb active">🍾</div>
+        <div class="detail-thumb">🌲</div>
+        <div class="detail-thumb">✨</div>
+      </div>
+    </div>
+    <!-- Detail Info -->
+    <div>
+      <div class="detail-brand">Le Labo</div>
+      <h2 class="detail-name">Santal 33</h2>
+      <div class="detail-sub">Eau de Parfum · 우디 오리엔탈</div>
+      <div class="detail-rating">
+        <span class="stars-lg">★★★★★</span>
+        <span style="font-size:18px;font-weight:500">4.9</span>
+        <span class="review-count">리뷰 1,284개</span>
+      </div>
+      <div class="detail-price">
+        ₩248,000
+        <span class="detail-price-orig">₩280,000</span>
+        <span class="detail-price-tag">11% 할인</span>
+      </div>
+
+      <div class="option-label">용량 선택</div>
+      <div class="option-chips">
+        <div class="opt-chip" onclick="selectOpt(this)">50ml</div>
+        <div class="opt-chip active" onclick="selectOpt(this)">100ml</div>
+        <div class="opt-chip" onclick="selectOpt(this)">200ml</div>
+      </div>
+
+      <div class="option-label">수량</div>
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="qty">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+        <span style="font-size:13px;color:var(--gray-400);margin-left:8px">재고 23개</span>
+      </div>
+
+      <!-- SCENT NOTE CHART (detail) -->
+      <div style="background:var(--linen-warm);border-radius:var(--r-md);padding:20px;margin-bottom:24px">
+        <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--gray-600);margin-bottom:14px;text-transform:uppercase">향 노트</div>
+        <div class="note-row" style="margin-bottom:12px">
+          <div class="note-label"><span class="note-name" style="color:var(--gray-600)">Top</span><span class="note-ingredients" style="color:var(--gray-400)">버가못 · 핑크 페퍼</span></div>
+          <div class="note-bar" style="background:var(--gray-200)"><div class="note-fill fill-top" style="width:70%"></div></div>
+        </div>
+        <div class="note-row" style="margin-bottom:12px">
+          <div class="note-label"><span class="note-name" style="color:var(--gray-600)">Middle</span><span class="note-ingredients" style="color:var(--gray-400)">아이리스 · 바이올렛</span></div>
+          <div class="note-bar" style="background:var(--gray-200)"><div class="note-fill fill-mid" style="width:85%"></div></div>
+        </div>
+        <div class="note-row" style="margin-bottom:0">
+          <div class="note-label"><span class="note-name" style="color:var(--gray-600)">Base</span><span class="note-ingredients" style="color:var(--gray-400)">샌달우드 · 머스크</span></div>
+          <div class="note-bar" style="background:var(--gray-200)"><div class="note-fill fill-base" style="width:92%"></div></div>
+        </div>
+      </div>
+
+      <!-- REVIEW SUMMARY -->
+      <div class="review-section">
+        <h3 style="font-family:var(--font-display);font-size:24px;font-weight:400;margin-bottom:24px">고객 리뷰</h3>
+        <div class="review-summary">
+          <div>
+            <div class="review-big-num">4.9</div>
+            <div class="review-big-stars">★★★★★</div>
+            <div class="review-total">리뷰 1,284개</div>
+          </div>
+          <div class="review-bars">
+            <div class="review-bar-row"><span class="review-bar-label">5</span><div class="review-bar-track"><div class="review-bar-fill" style="width:85%"></div></div></div>
+            <div class="review-bar-row"><span class="review-bar-label">4</span><div class="review-bar-track"><div class="review-bar-fill" style="width:10%"></div></div></div>
+            <div class="review-bar-row"><span class="review-bar-label">3</span><div class="review-bar-track"><div class="review-bar-fill" style="width:3%"></div></div></div>
+            <div class="review-bar-row"><span class="review-bar-label">2</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div></div>
+            <div class="review-bar-row"><span class="review-bar-label">1</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div></div>
+          </div>
+        </div>
+        <div class="photo-reviews">
+          <div class="photo-slot">🌲</div>
+          <div class="photo-slot">🍾</div>
+          <div class="photo-slot">✨</div>
+          <div class="photo-slot" style="background:var(--navy);color:var(--amber);font-size:14px;font-weight:500">+48</div>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer-avatar">김</div>
+            <div><div class="reviewer-name">김지현</div><div class="reviewer-date" style="color:var(--amber)">★★★★★ · 2025.11.20</div></div>
+          </div>
+          <div class="review-text">정말 독보적인 향이에요. 처음엔 낯설었는데 시간이 지날수록 더 좋아지는 향이에요. 지속력도 8시간 이상 유지되고, 주변에서 향이 뭐냐고 물어보는 분들이 많아요. 가격대가 있지만 그 이상의 가치가 있습니다.</div>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer-avatar" style="background:#7C3AED">P</div>
+            <div><div class="reviewer-name">Park Junwoo</div><div class="reviewer-date" style="color:var(--amber)">★★★★★ · 2025.11.15</div></div>
+          </div>
+          <div class="review-text">Le Labo 향수 중에 가장 보편적으로 사랑받는 향. 특유의 우디-샌달우드 조합이 계절 불문하고 어울려서 사계절 내내 쓰고 있습니다. 세 번째 구매입니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- STICKY BAR -->
+  <div class="sticky-bar">
+    <div class="sticky-info">
+      <div class="sticky-name">Santal 33 · 100ml</div>
+      <div class="sticky-price">₩248,000</div>
+    </div>
+    <button class="btn-cart" onclick="addToCart()">장바구니</button>
+    <button class="btn-buy" onclick="showPage('cart')">바로 구매</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PAGE: CART ═══════════════════════ -->
+<div class="page" id="page-cart">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-breadcrumb">홈 > <span>장바구니</span></div>
+      <h1 class="page-h1">장바구니 (3)</h1>
+    </div>
+  </div>
+  <div class="cart-layout">
+    <div>
+      <!-- Vendor Group 1 -->
+      <div class="vendor-group">
+        <div class="vendor-head">
+          <span style="font-size:20px">🏪</span>
+          <span class="vendor-name-tag">Le Labo 공식 스토어</span>
+          <span class="vendor-ship">배송비 ₩3,000</span>
+        </div>
+        <div class="cart-item">
+          <div class="cart-item-img">🍾</div>
+          <div class="cart-item-info">
+            <div class="cart-item-brand">Le Labo</div>
+            <div class="cart-item-name">Santal 33</div>
+            <div class="cart-item-opt">100ml · EDP</div>
+          </div>
+          <div class="cart-item-right">
+            <div class="cart-item-price">₩248,000</div>
+            <div class="cart-qty">
+              <button class="cqb" onclick="cartQty(this,-1)">−</button>
+              <span class="cqn">1</span>
+              <button class="cqb" onclick="cartQty(this,1)">+</button>
+            </div>
+            <span class="cart-del">삭제</span>
+          </div>
+        </div>
+      </div>
+      <!-- Vendor Group 2 -->
+      <div class="vendor-group">
+        <div class="vendor-head">
+          <span style="font-size:20px">🏪</span>
+          <span class="vendor-name-tag">Chanel Beauty Korea</span>
+          <span class="vendor-ship">배송비 무료</span>
+        </div>
+        <div class="cart-item">
+          <div class="cart-item-img">💙</div>
+          <div class="cart-item-info">
+            <div class="cart-item-brand">Chanel</div>
+            <div class="cart-item-name">Bleu de Chanel EDP</div>
+            <div class="cart-item-opt">100ml · EDP</div>
+          </div>
+          <div class="cart-item-right">
+            <div class="cart-item-price">₩220,000</div>
+            <div class="cart-qty">
+              <button class="cqb" onclick="cartQty(this,-1)">−</button>
+              <span class="cqn">1</span>
+              <button class="cqb" onclick="cartQty(this,1)">+</button>
+            </div>
+            <span class="cart-del">삭제</span>
+          </div>
+        </div>
+        <div class="cart-item">
+          <div class="cart-item-img">🌸</div>
+          <div class="cart-item-info">
+            <div class="cart-item-brand">Dior</div>
+            <div class="cart-item-name">Miss Dior Blooming</div>
+            <div class="cart-item-opt">50ml · EDT</div>
+          </div>
+          <div class="cart-item-right">
+            <div class="cart-item-price">₩155,000</div>
+            <div class="cart-qty">
+              <button class="cqb" onclick="cartQty(this,-1)">−</button>
+              <span class="cqn">2</span>
+              <button class="cqb" onclick="cartQty(this,1)">+</button>
+            </div>
+            <span class="cart-del">삭제</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY BOX -->
+    <div class="summary-box">
+      <div class="summary-head">
+        <div class="summary-head-title">결제 금액</div>
+      </div>
+      <div class="summary-body">
+        <div class="delivery-form">
+          <div class="delivery-title">📦 배송지 정보</div>
+          <div class="form-field">
+            <label>수령인</label>
+            <input type="text" placeholder="홍길동">
+          </div>
+          <div class="form-field">
+            <label>연락처</label>
+            <input type="text" placeholder="010-0000-0000">
+          </div>
+          <div class="form-field">
+            <label>주소</label>
+            <input type="text" placeholder="서울특별시 강남구 ...">
+          </div>
+        </div>
+        <div class="summary-row"><span class="label">상품 금액</span><span class="val">₩623,000</span></div>
+        <div class="summary-row"><span class="label">배송비</span><span class="val">₩3,000</span></div>
+        <div class="summary-row"><span class="label">할인 금액</span><span class="val discount">−₩32,000</span></div>
+        <div class="summary-total">
+          <span class="total-label">최종 결제 금액</span>
+          <span class="total-val">₩594,000</span>
+        </div>
+        <button class="toss-btn" onclick="tossPayment()">
+          <div class="toss-logo">💙 <span class="toss-badge">toss</span> pay로 결제</div>
+        </button>
+        <div style="font-size:11px;color:var(--gray-400);text-align:center;margin-top:10px">생체인식 또는 비밀번호로 간편 결제</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PAGE: VENDOR ADMIN ═══════════════════════ -->
+<div class="page" id="page-vendor">
+  <div class="admin-layout">
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+      <div class="sidebar-head">
+        <div class="sidebar-logo">파트너 센터</div>
+        <div class="sidebar-sub">Le Labo 공식 스토어</div>
+      </div>
+      <div class="sidebar-menu">
+        <div class="sidebar-item active" onclick="vendorMenu(this,'dashboard')"><span class="sidebar-icon">📊</span> 대시보드</div>
+        <div class="sidebar-item" onclick="vendorMenu(this,'orders')"><span class="sidebar-icon">📦</span> 주문 관리</div>
+        <div class="sidebar-item" onclick="vendorMenu(this,'products')"><span class="sidebar-icon">🍾</span> 상품 등록</div>
+        <div class="sidebar-item" onclick="vendorMenu(this,'tax')"><span class="sidebar-icon">🧾</span> 세금계산서</div>
+        <div class="sidebar-item"><span class="sidebar-icon">💬</span> 고객 문의</div>
+        <div class="sidebar-item"><span class="sidebar-icon">⚙️</span> 스토어 설정</div>
+      </div>
+    </div>
+    <!-- MAIN -->
+    <div class="admin-main">
+      <!-- DASHBOARD PANEL -->
+      <div id="v-dashboard">
+        <div class="stat-cards">
+          <div class="stat-card s-blue">
+            <div class="stat-label">신규 주문</div>
+            <div class="stat-num">24</div>
+            <div class="stat-change up">↑ 오늘 +8</div>
+          </div>
+          <div class="stat-card s-amber">
+            <div class="stat-label">배송 준비</div>
+            <div class="stat-num">37</div>
+            <div class="stat-change">처리 대기</div>
+          </div>
+          <div class="stat-card s-green">
+            <div class="stat-label">이번 달 매출</div>
+            <div class="stat-num">₩48M</div>
+            <div class="stat-change up">↑ 23% vs 지난달</div>
+          </div>
+          <div class="stat-card s-red">
+            <div class="stat-label">재고 부족</div>
+            <div class="stat-num">3</div>
+            <div class="stat-change down">확인 필요</div>
+          </div>
+        </div>
+
+        <!-- ORDER STATUS MATRIX -->
+        <div class="admin-card" id="v-orders-card">
+          <div class="admin-card-head">
+            <span class="admin-card-title">주문 · 배송 현황</span>
+            <button class="action-btn" onclick="showToast('주문 현황이 새로고침 되었습니다')">새로고침</button>
+          </div>
+          <div class="admin-card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>주문번호</th>
+                  <th>상품명</th>
+                  <th>고객</th>
+                  <th>금액</th>
+                  <th>상태</th>
+                  <th>처리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-family:monospace;font-size:12px">SA-2025-11284</td>
+                  <td>Santal 33 · 100ml</td>
+                  <td>김지현</td>
+                  <td>₩248,000</td>
+                  <td><span class="status-badge s-new">신규주문</span></td>
+                  <td><button class="action-btn" onclick="updateStatus(this,'s-prep','배송준비')">배송준비</button></td>
+                </tr>
+                <tr>
+                  <td style="font-family:monospace;font-size:12px">SA-2025-11283</td>
+                  <td>Rose 31 · 50ml</td>
+                  <td>이민준</td>
+                  <td>₩168,000</td>
+                  <td><span class="status-badge s-prep">배송준비</span></td>
+                  <td><button class="action-btn" onclick="updateStatus(this,'s-ship','배송중')">배송중으로</button></td>
+                </tr>
+                <tr>
+                  <td style="font-family:monospace;font-size:12px">SA-2025-11280</td>
+                  <td>Another 13 · 100ml</td>
+                  <td>박소연</td>
+                  <td>₩224,000</td>
+                  <td><span class="status-badge s-ship">배송중</span></td>
+                  <td><button class="action-btn" onclick="updateStatus(this,'s-done','완료')">배송완료</button></td>
+                </tr>
+                <tr>
+                  <td style="font-family:monospace;font-size:12px">SA-2025-11275</td>
+                  <td>Noir 29 · 100ml</td>
+                  <td>최준혁</td>
+                  <td>₩198,000</td>
+                  <td><span class="status-badge s-done">배송완료</span></td>
+                  <td><span style="font-size:12px;color:var(--gray-400)">처리 완료</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT FORM PANEL -->
+      <div id="v-products" style="display:none">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <span class="admin-card-title">향수 상품 등록</span>
+            <button class="action-btn" onclick="showToast('임시저장 완료')">임시저장</button>
+          </div>
+          <div class="product-form">
+            <div class="form-row">
+              <div class="form-group"><label>브랜드명</label><input type="text" placeholder="Le Labo" value="Le Labo"></div>
+              <div class="form-group"><label>상품명</label><input type="text" placeholder="Santal 33" value="Santal 33"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>향 계열</label><select><option>우디</option><option>플로럴</option><option>시트러스</option><option>오리엔탈</option><option>아쿠아틱</option></select></div>
+              <div class="form-group"><label>성별</label><select><option>공용</option><option>남성</option><option>여성</option></select></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>용량 (ml)</label><input type="number" placeholder="100" value="100"></div>
+              <div class="form-group"><label>판매가 (원)</label><input type="number" placeholder="248000" value="248000"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>탑 노트</label><input type="text" placeholder="버가못, 핑크 페퍼"></div>
+              <div class="form-group"><label>미들 노트</label><input type="text" placeholder="아이리스, 바이올렛"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>베이스 노트</label><input type="text" placeholder="샌달우드, 머스크"></div>
+              <div class="form-group"><label>지속력</label><select><option>약 (2~4h)</option><option>중 (4~6h)</option><option selected>강 (6~8h)</option><option>매우 강 (8h+)</option></select></div>
+            </div>
+            <div class="form-group" style="margin-bottom:16px"><label>상품 설명</label><textarea rows="4" placeholder="향수에 대한 자세한 설명을 입력하세요...">Santal 33은 Le Labo의 대표 향수로, 따뜻하고 깊은 샌달우드 향이 특징입니다...</textarea></div>
+            <div class="form-row">
+              <div class="form-group"><label>재고 수량</label><input type="number" placeholder="50" value="23"></div>
+              <div class="form-group"><label>할인율 (%)</label><input type="number" placeholder="0" value="11"></div>
+            </div>
+            <button class="btn-primary" onclick="showToast('상품이 성공적으로 등록되었습니다!')">상품 등록하기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAX PANEL -->
+      <div id="v-tax" style="display:none">
+        <div class="admin-card">
+          <div class="admin-card-head">
+            <span class="admin-card-title">전자세금계산서 발행 내역</span>
+            <button class="tax-btn" onclick="showToast('발행 요청이 접수되었습니다')">+ 발행 요청</button>
+          </div>
+          <div class="tax-table">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 120px;gap:8px;padding:8px 0;font-size:11px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--gray-200)">
+              <span>발행일</span><span>정산 기간</span><span>공급가액</span><span>상태</span><span></span>
+            </div>
+            <div class="tax-row" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 120px;gap:8px">
+              <span>2025-11-01</span><span>10월 1~31일</span><span>₩38,400,000</span><span><span class="status-badge s-done">발행완료</span></span><span><button class="action-btn">다운로드</button></span>
+            </div>
+            <div class="tax-row" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 120px;gap:8px">
+              <span>2025-10-01</span><span>9월 1~30일</span><span>₩29,150,000</span><span><span class="status-badge s-done">발행완료</span></span><span><button class="action-btn">다운로드</button></span>
+            </div>
+            <div class="tax-row" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 120px;gap:8px">
+              <span>요청중</span><span>11월 1~30일</span><span>₩48,000,000</span><span><span class="status-badge s-new">처리중</span></span><span><span style="font-size:12px;color:var(--gray-400)">대기</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PAGE: SUPER ADMIN ═══════════════════════ -->
+<div class="page" id="page-superadmin">
+  <div class="sa-header">
+    <div class="sa-header-inner">
+      <div class="sa-logo">ScentAtelier <span>ADMIN</span></div>
+      <div class="sa-nav">
+        <div class="sa-nav-item active">대시보드</div>
+        <div class="sa-nav-item">회원 관리</div>
+        <div class="sa-nav-item">상품 관리</div>
+        <div class="sa-nav-item">주문 현황</div>
+        <div class="sa-nav-item">시스템</div>
+      </div>
+    </div>
+  </div>
+  <div class="sa-body">
+    <!-- STATS -->
+    <div class="sa-stats">
+      <div class="sa-stat">
+        <div class="sa-stat-icon">👥</div>
+        <div class="sa-stat-num">18,420</div>
+        <div class="sa-stat-label">전체 회원 수</div>
+      </div>
+      <div class="sa-stat">
+        <div class="sa-stat-icon">🏪</div>
+        <div class="sa-stat-num">320</div>
+        <div class="sa-stat-label">입점사 수</div>
+      </div>
+      <div class="sa-stat">
+        <div class="sa-stat-icon">📦</div>
+        <div class="sa-stat-num">5,840</div>
+        <div class="sa-stat-label">이번 달 주문</div>
+      </div>
+      <div class="sa-stat">
+        <div class="sa-stat-icon">🚨</div>
+        <div class="sa-stat-num" style="color:#EF4444">12</div>
+        <div class="sa-stat-label">미처리 신고</div>
+      </div>
+    </div>
+
+    <div class="sa-grid">
+      <!-- REPORT QUEUE -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <span class="admin-card-title">🚨 신고 모니터링 큐</span>
+          <span class="status-badge s-new">12 미처리</span>
+        </div>
+        <div class="admin-card-body">
+          <div class="report-item">
+            <div class="report-type rt-review">💬</div>
+            <div class="report-content">
+              <div class="report-title">허위 리뷰 신고 — Aventus 상품</div>
+              <div class="report-meta">신고자: user_4821 · 3분 전</div>
+            </div>
+            <div class="report-action">
+              <button class="blind-btn" onclick="showToast('블라인드 처리 완료')">블라인드</button>
+              <button class="pass-btn" onclick="showToast('정상 처리되었습니다')">정상</button>
+            </div>
+          </div>
+          <div class="report-item">
+            <div class="report-type rt-product">🍾</div>
+            <div class="report-content">
+              <div class="report-title">위조품 의심 신고 — Black Opium 50ml</div>
+              <div class="report-meta">신고자: user_2094 · 17분 전</div>
+            </div>
+            <div class="report-action">
+              <button class="blind-btn" onclick="showToast('상품 블라인드 처리 완료')">블라인드</button>
+              <button class="pass-btn" onclick="showToast('정상 처리되었습니다')">정상</button>
+            </div>
+          </div>
+          <div class="report-item">
+            <div class="report-type rt-inquiry">📝</div>
+            <div class="report-content">
+              <div class="report-title">욕설 포함 리뷰 신고 — Santal 33</div>
+              <div class="report-meta">신고자: user_5510 · 42분 전</div>
+            </div>
+            <div class="report-action">
+              <button class="blind-btn" onclick="showToast('블라인드 처리 완료')">블라인드</button>
+              <button class="pass-btn" onclick="showToast('정상 처리되었습니다')">정상</button>
+            </div>
+          </div>
+          <div class="report-item">
+            <div class="report-type rt-review">💬</div>
+            <div class="report-content">
+              <div class="report-title">스팸 리뷰 의심 — Miss Dior</div>
+              <div class="report-meta">신고자: user_3871 · 1시간 전</div>
+            </div>
+            <div class="report-action">
+              <button class="blind-btn" onclick="showToast('블라인드 처리 완료')">블라인드</button>
+              <button class="pass-btn" onclick="showToast('정상 처리되었습니다')">정상</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VENDOR MANAGEMENT -->
+      <div class="admin-card">
+        <div class="admin-card-head">
+          <span class="admin-card-title">🏪 입점사 승인 관리</span>
+          <span class="status-badge s-amber">5 검토 대기</span>
+        </div>
+        <div class="admin-card-body">
+          <div class="vendor-row">
+            <div class="vendor-avatar">나</div>
+            <div class="vendor-info">
+              <div class="vendor-biz">나이스 퍼퓸 (주)</div>
+              <div class="vendor-email">contact@niceperfume.kr · 수입 향수</div>
+            </div>
+            <button class="approve-btn" onclick="showToast('입점 승인 완료')">승인</button>
+            <button class="reject-btn" onclick="showToast('반려 처리되었습니다')">반려</button>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-avatar">향</div>
+            <div class="vendor-info">
+              <div class="vendor-biz">향기로운 사람들</div>
+              <div class="vendor-email">hello@scentpeople.co · 국내 브랜드</div>
+            </div>
+            <button class="approve-btn" onclick="showToast('입점 승인 완료')">승인</button>
+            <button class="reject-btn" onclick="showToast('반려 처리되었습니다')">반려</button>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-avatar">P</div>
+            <div class="vendor-info">
+              <div class="vendor-biz">Parfum Studio Co.</div>
+              <div class="vendor-email">studio@parfum.kr · 독립 향수</div>
+            </div>
+            <button class="approve-btn" onclick="showToast('입점 승인 완료')">승인</button>
+            <button class="reject-btn" onclick="showToast('반려 처리되었습니다')">반려</button>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-avatar" style="background:#10B981">N</div>
+            <div class="vendor-info">
+              <div class="vendor-biz">Niche Fragrance KR</div>
+              <div class="vendor-email">info@nichefragrance.kr · 니치 향수</div>
+            </div>
+            <button class="approve-btn" onclick="showToast('입점 승인 완료')">승인</button>
+            <button class="reject-btn" onclick="showToast('반려 처리되었습니다')">반려</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ EDITOR -->
+      <div class="admin-card sa-grid-full">
+        <div class="admin-card-head">
+          <span class="admin-card-title">📢 공지사항 · FAQ 에디터</span>
+          <select style="font-size:13px;padding:5px 10px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-family:var(--font-body)"><option>공지사항</option><option>FAQ</option></select>
+        </div>
+        <div class="editor-area">
+          <div class="editor-toolbar">
+            <button class="tb-btn"><b>B</b></button>
+            <button class="tb-btn"><i>I</i></button>
+            <button class="tb-btn"><u>U</u></button>
+            <button class="tb-btn">H1</button>
+            <button class="tb-btn">H2</button>
+            <button class="tb-btn">—</button>
+            <button class="tb-btn">🔗</button>
+            <button class="tb-btn">🖼</button>
+            <button class="tb-btn">📋</button>
+          </div>
+          <div class="editor-content" contenteditable="true">
+            <p><strong>[필독] 2025년 연말 배송 안내</strong></p>
+            <p>안녕하세요, ScentAtelier입니다. 연말 연휴 기간(12월 24일 ~ 1월 2일) 동안 배송이 다소 지연될 수 있습니다. 고객 여러분의 양해 부탁드립니다.</p>
+          </div>
+          <button class="pub-btn" onclick="showToast('공지사항이 게시되었습니다')">게시하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs={home:0,detail:1,cart:2,vendor:3,superadmin:4};
+  document.querySelectorAll('.nav-tab')[tabs[id]].classList.add('active');
+  window.scrollTo(0,0);
+}
+function filterChip(el){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+let qty=1;
+function changeQty(d){
+  qty=Math.max(1,qty+d);
+  document.getElementById('qty').textContent=qty;
+}
+function selectOpt(el){
+  el.closest('.option-chips').querySelectorAll('.opt-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+function cartQty(btn,d){
+  const row=btn.closest('.cart-qty');
+  const num=row.querySelector('.cqn');
+  let v=parseInt(num.textContent)+d;
+  if(v<1)v=1;
+  num.textContent=v;
+}
+function addToCart(){
+  showToast('장바구니에 담겼습니다!');
+  document.querySelector('.nav-badge').textContent='4';
+}
+function updateStatus(btn,cls,label){
+  const td=btn.closest('td').previousElementSibling;
+  td.innerHTML=`<span class="status-badge ${cls}">${label}</span>`;
+  showToast(`상태가 "${label}"로 변경되었습니다`);
+  btn.textContent=label==='배송준비'?'배송중으로':label==='배송중'?'배송완료':'완료';
+  if(label==='완료')btn.disabled=true;
+}
+function vendorMenu(el,panel){
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  ['dashboard','products','tax'].forEach(id=>{
+    const el=document.getElementById('v-'+id);
+    if(el)el.style.display=id===panel?'block':'none';
+  });
+}
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+function tossPayment(){
+  showToast('토스페이 결제창을 불러옵니다...');
+  setTimeout(()=>showToast('결제가 완료되었습니다! 🎉'),2000);
+}
+</script>
+</body>
+</html>
