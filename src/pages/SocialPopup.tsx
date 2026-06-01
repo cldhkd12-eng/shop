@@ -28,9 +28,10 @@ export const SocialPopup: React.FC = () => {
   };
 
   const isKakao = platform === 'kakao';
+  const isNaver = platform === 'naver';
 
   return (
-    <PopupContainer isKakao={isKakao}>
+    <PopupContainer isKakao={isKakao} isNaver={isNaver}>
       {isKakao ? (
         <Card>
           {/* KAKAO LOGIN MOCKUP */}
@@ -74,6 +75,55 @@ export const SocialPopup: React.FC = () => {
                 />
               </InputGroup>
               <KakaoSubmitBtn type="submit">동의하고 계속하기</KakaoSubmitBtn>
+            </Form>
+          </Body>
+        </Card>
+      ) : isNaver ? (
+        <Card>
+          {/* NAVER LOGIN MOCKUP */}
+          <NaverHeader>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+            </svg>
+            <HeaderTitle style={{ color: 'white' }}>NAVER</HeaderTitle>
+          </NaverHeader>
+
+          <Body>
+            <AppInfo>
+              <AppIcon>SA</AppIcon>
+              <AppText>
+                <strong>ScentAtelier</strong>에서<br />
+                아래 권한을 요청합니다.
+              </AppText>
+            </AppInfo>
+
+            <PermissionBox>
+              <PermissionItem>✓ 필수: 네이버 프로필 이름</PermissionItem>
+              <PermissionItem>✓ 필수: 네이버 계정 이메일 주소</PermissionItem>
+            </PermissionBox>
+
+            <Form onSubmit={handleLoginSubmit}>
+              <InputGroup>
+                <label>이름 입력</label>
+                <input
+                  type="text"
+                  placeholder="네이버 이름"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                />
+              </InputGroup>
+              <InputGroup>
+                <label>이메일 주소</label>
+                <input
+                  type="email"
+                  placeholder="username@naver.com"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                />
+              </InputGroup>
+              <NaverSubmitBtn type="submit">동의하고 로그인</NaverSubmitBtn>
             </Form>
           </Body>
         </Card>
@@ -135,10 +185,10 @@ export const SocialPopup: React.FC = () => {
 };
 
 /* ─── STYLED COMPONENTS ─── */
-const PopupContainer = styled.div<{ isKakao: boolean }>`
+const PopupContainer = styled.div<{ isKakao: boolean; isNaver: boolean }>`
   width: 100%;
   min-height: 100vh;
-  background: ${props => (props.isKakao ? '#F7F7F7' : '#F0F4F9')};
+  background: ${props => (props.isKakao ? '#F7F7F7' : props.isNaver ? '#F9FBF9' : '#F0F4F9')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,6 +209,14 @@ const Card = styled.div`
 
 const KakaoHeader = styled.div`
   background: #FEE500;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const NaverHeader = styled.div`
+  background: #03C75A;
   padding: 24px;
   display: flex;
   align-items: center;
@@ -294,6 +352,23 @@ const KakaoSubmitBtn = styled.button`
 
   &:hover {
     background: #E6CE00;
+  }
+`;
+
+const NaverSubmitBtn = styled.button`
+  width: 100%;
+  padding: 14px;
+  background: #03C75A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+
+  &:hover {
+    background: #02b34f;
   }
 `;
 
