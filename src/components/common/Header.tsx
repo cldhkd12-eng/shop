@@ -10,6 +10,10 @@ export const Header: React.FC = () => {
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
+  if (location.pathname.includes('/login/social-popup')) {
+    return null;
+  }
+
   const isAdmin = location.pathname.startsWith('/admin') || location.pathname.startsWith('/vendor');
 
   const navTabs = isAdmin

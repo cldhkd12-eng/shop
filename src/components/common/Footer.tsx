@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  if (location.pathname.includes('/login/social-popup')) {
+    return null;
+  }
 
   return (
     <FooterContainer>
