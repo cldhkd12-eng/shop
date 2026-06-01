@@ -348,22 +348,22 @@ export const Home: React.FC = () => {
           </ColLabel>
         </LabelsCol>
 
-        {/* ── Column 1: fast ↑ (−6% scroll speed) ── */}
-        <PCol style={{ transform: `translateY(${c1}px)` }}>
+        {/* ── Column 1: Static ── */}
+        <PCol>
           <TiltCell src="/img/p10.png" alt="I Don't Know What"  onClick={() => navigate('/detail/p2')} $delay={0}   $dur={5.5} />
           <TiltCell src="/img/p2.png"  alt="Cowboy Grass"       onClick={() => navigate('/detail/p3')} $delay={0.8} $dur={7.0} />
           <TiltCell src="/img/p7.png"  alt="Burning Barbershop" onClick={() => navigate('/detail/p7')} $delay={1.6} $dur={6.2} />
         </PCol>
 
-        {/* ── Column 2: reverse drift ↓ (+3%) ── */}
-        <PCol style={{ transform: `translateY(${c2}px)` }}>
+        {/* ── Column 2: Static ── */}
+        <PCol>
           <TiltCell src="/img/p6.png" alt="Steamed Rainbow"     onClick={() => navigate('/detail/p6')} $delay={0.4} $dur={6.8} />
           <TiltCell src="/img/p1.png" alt="Debaser"             onClick={() => navigate('/detail/p1')} $delay={1.2} $dur={5.8} />
           <TiltCell src="/img/p8.png" alt="Mississippi Medicine" onClick={() => navigate('/detail/p8')} $delay={2.0} $dur={7.2} />
         </PCol>
 
-        {/* ── Column 3: fastest ↑ (−10%) ── */}
-        <PCol style={{ transform: `translateY(${c3}px)` }}>
+        {/* ── Column 3: Static ── */}
+        <PCol>
           <TiltCell src="/img/p5.png" alt="Radio Bombay"    onClick={() => navigate('/detail/p5')} $delay={0.2} $dur={6.4} />
           <TiltCell src="/img/p4.png" alt="Bowmakers"       onClick={() => navigate('/detail/p4')} $delay={1.0} $dur={5.6} />
           <TiltCell src="/img/p9.png" alt="Jasmine Yucatan" onClick={() => navigate('/detail/p9')} $delay={1.8} $dur={7.4} />
@@ -958,13 +958,17 @@ const CellWrap = styled.div`
   }
 `;
 
-const FloatingImg = styled.img<{ $delay: number; $dur: number }>`
+const FloatingImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  animation: ${floatAnim} ${p => p.$dur}s ${p => p.$delay}s ease-in-out infinite;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   will-change: transform;
+
+  ${CellWrap}:hover & {
+    transform: scale(1.05);
+  }
 `;
 
 const CellShimmer = styled.div.attrs({ className: 'cell-shimmer' })`
