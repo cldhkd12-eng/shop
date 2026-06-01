@@ -445,7 +445,7 @@ export const Home: React.FC = () => {
                 <path d="M50 35C57 22 70 22 58 35C72 28 70 42 50 35Z" />
               </svg>
             </ServiceCard>
-            <ServiceText>Free Diptyque Gift Boxes</ServiceText>
+            <ServiceText>Free ScentAtelier Gift Boxes</ServiceText>
           </ServiceItem>
 
           <ServiceItem>
