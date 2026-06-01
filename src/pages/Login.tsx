@@ -50,6 +50,23 @@ export const Login: React.FC = () => {
       return;
     }
 
+    if (platform === 'kakao') {
+      const clientId = '3b01d1cfd2249b7fd70616bbdd18a98f';
+      const redirectUri = encodeURIComponent(window.location.origin + '/#/login/social-popup?platform=kakao');
+      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+
+      const width = 450;
+      const height = 600;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+      window.open(
+        kakaoAuthUrl,
+        'kakaoLoginPopup',
+        `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
+      );
+      return;
+    }
+
     const width = 450;
     const height = 600;
     const left = window.screen.width / 2 - width / 2;

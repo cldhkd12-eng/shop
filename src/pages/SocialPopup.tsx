@@ -10,7 +10,7 @@ export const SocialPopup: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Parse token from hash (Naver redirects token in the hash fragment)
+    // 1. Naver flow (using access_token in hash)
     const hash = window.location.hash;
     const tokenMatch = hash.match(/access_token=([^&]*)/);
     const token = tokenMatch ? tokenMatch[1] : null;
@@ -47,8 +47,69 @@ export const SocialPopup: React.FC = () => {
         console.error('Naver profile fetch error:', err);
         setLoading(false);
       });
+      return;
     }
-  }, []);
+
+    // 2. Kakao flow (using authorization code in query params)
+    const code = searchParams.get('code');
+    if (platform === 'kakao' && code) {
+      setLoading(true);
+      
+      const body = new URLSearchParams({
+        grant_type: 'authorization_code',
+        client_id: '3b01d1cfd2249b7fd70616bbdd18a98f',
+        redirect_uri: window.location.origin + '/#/login/social-popup?platform=kakao',
+        code: code
+      });
+
+      fetch('/api/kakao-oauth/oauth/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        },
+        body: body
+      })
+      .then(res => res.json())
+      .then(tokenData => {
+        const accessToken = tokenData.access_token;
+        if (accessToken) {
+          // Fetch Profile
+          return fetch('/api/kakao-api/v2/user/me', {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`
+            }
+          });
+        } else {
+          throw new Error('No access token returned');
+        }
+      })
+      .then(res => res.json())
+      .then(profileData => {
+        if (profileData && profileData.kakao_account) {
+          const nickname = profileData.kakao_account.profile?.nickname || '카카오 사용자';
+          const kakaoEmail = profileData.kakao_account.email || '';
+          if (window.opener) {
+            window.opener.postMessage(
+              {
+                type: 'SOCIAL_LOGIN_SUCCESS',
+                name: nickname,
+                email: kakaoEmail,
+                platform: 'kakao',
+              },
+              window.location.origin
+            );
+            window.close();
+          }
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        console.error('Kakao login error:', err);
+        setLoading(false);
+      });
+    }
+  }, [searchParams, platform]);
 
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,7 +137,7 @@ export const SocialPopup: React.FC = () => {
       <PopupContainer isKakao={false} isNaver={true}>
         <LoadingCard>
           <Spinner />
-          <LoadingText>네이버 로그인 처리 중입니다...</LoadingText>
+          <LoadingText>로그인 처리 중입니다...</LoadingText>
         </LoadingCard>
       </PopupContainer>
     );

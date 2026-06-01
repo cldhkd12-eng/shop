@@ -6,6 +6,14 @@
     {
       "source": "/api/naver/:path*",
       "destination": "https://openapi.naver.com/:path*"
+    },
+    {
+      "source": "/api/kakao-oauth/:path*",
+      "destination": "https://kauth.kakao.com/:path*"
+    },
+    {
+      "source": "/api/kakao-api/:path*",
+      "destination": "https://kapi.kakao.com/:path*"
     }
   ]
 }
