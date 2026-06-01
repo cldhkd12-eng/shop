@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 
 export const SocialPopup: React.FC = () => {
