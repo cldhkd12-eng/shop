@@ -627,9 +627,9 @@ const BlackBox = styled.div<{ $revealed: boolean }>`
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 140px;
-    height: 48px;
-    background: radial-gradient(circle at bottom right, #050505 10%, rgba(5,5,5,0.95) 45%, transparent 100%);
+    width: 135px;
+    height: 45px;
+    background: #080808;
     z-index: 1;
     pointer-events: none;
   }
