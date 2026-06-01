@@ -1281,25 +1281,52 @@ const NewsSubmit = styled.button`
 /* ── At Your Service Styles ── */
 const ServiceSection = styled.section<{ $visible: boolean }>`
   border-bottom: 2px solid #000;
-  padding: 80px 40px;
-  background: #FAF8F5;
+  padding: 100px 40px;
+  background: #0a0a0f;
+  position: relative;
+  overflow: hidden;
   text-align: center;
   opacity: ${p => p.$visible ? 1 : 0};
   transform: ${p => p.$visible ? 'translateY(0)' : 'translateY(30px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
 
+  /* Glowing background orbs */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(180, 130, 255, 0.05) 0%, transparent 70%);
+    top: -50px;
+    left: 8%;
+    pointer-events: none;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(201, 152, 106, 0.06) 0%, transparent 70%);
+    bottom: -50px;
+    right: 12%;
+    pointer-events: none;
+  }
+
   @media (max-width: 768px) {
-    padding: 60px 20px;
+    padding: 70px 20px;
   }
 `;
 
 const ServiceTitle = styled.h2`
   font-family: ${p => p.theme.fonts.display};
-  font-size: 38px;
-  font-weight: 700;
-  color: #000;
-  margin: 0 0 56px;
-  letter-spacing: 0.05em;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 30%, #c9986a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 60px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 `;
 
@@ -1312,12 +1339,12 @@ const ServiceGrid = styled.div`
 
   @media (max-width: 1100px) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px 20px;
+    gap: 48px 20px;
   }
 
   @media (max-width: 600px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px 12px;
+    gap: 36px 12px;
   }
 `;
 
@@ -1325,48 +1352,92 @@ const ServiceItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ServiceCard = styled.div`
-  border: 2px solid #000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 60px;
   width: 120px;
   height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-bottom: 20px;
   box-sizing: border-box;
-  padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 24px;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              border-color 0.4s ease, 
+              box-shadow 0.4s ease,
+              background-color 0.4s ease;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 60px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(201,152,106,0.08));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-8px) scale(1.03) rotate(1deg);
+    border-color: rgba(201, 152, 106, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 12px 30px rgba(201, 152, 106, 0.12), 
+                inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+    &::before {
+      background: linear-gradient(135deg, #ffffff, #c9986a);
+    }
+
+    svg {
+      color: #c9986a;
+      filter: drop-shadow(0 0 8px rgba(201, 152, 106, 0.35));
+      transform: scale(1.05);
+    }
   }
 
   svg {
     width: 100%;
     height: 100%;
-    color: #000;
+    color: rgba(255, 255, 255, 0.75);
+    transition: transform 0.4s ease, color 0.4s ease, filter 0.4s ease;
   }
 
   @media (max-width: 768px) {
     width: 100px;
     height: 140px;
     border-radius: 50px;
+    &::before {
+      border-radius: 50px;
+    }
   }
 `;
 
 const ServiceText = styled.p`
   font-size: 11px;
-  line-height: 1.5;
-  color: #000;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
   margin: 0;
   max-width: 140px;
   word-break: keep-all;
   text-align: center;
+  transition: color 0.3s ease;
+
+  ${ServiceItem}:hover & {
+    color: #ffffff;
+  }
 `;
 
