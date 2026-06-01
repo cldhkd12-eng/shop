@@ -222,6 +222,7 @@ export const Home: React.FC = () => {
   const gridReveal = useScrollReveal(0.1);
   const sprayReveal = useScrollReveal(0.1);
   const quizReveal = useScrollReveal(0.15);
+  const serviceReveal = useScrollReveal(0.12);
 
   useEffect(() => {
     const t = setTimeout(() => setHeroRevealed(true), 200);
@@ -413,7 +414,105 @@ export const Home: React.FC = () => {
       </QuizSec>
 
       {/* ════════════════════════════════
-           5. NEWSLETTER BAR
+           5. AT YOUR SERVICE
+          ════════════════════════════════ */}
+      <ServiceSection ref={serviceReveal.ref} $visible={serviceReveal.visible}>
+        <ServiceTitle>At your service</ServiceTitle>
+        <ServiceGrid>
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M50 15L15 32L50 49L85 32L50 15Z" />
+                <path d="M15 32V68L50 85V49" />
+                <path d="M85 32V68L50 85" />
+                <path d="M50 49V85" />
+                <path d="M43 23L50 26L57 23" />
+                <path d="M12 21L19 24" />
+                <path d="M10 15L20 18" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Free UPS Ground shipping on all U.S. and Canada orders.</ServiceText>
+          </ServiceItem>
+
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="25" y="45" width="50" height="40" rx="3" />
+                <rect x="20" y="35" width="60" height="10" rx="2" />
+                <line x1="50" y1="35" x2="50" y2="85" />
+                <line x1="25" y1="65" x2="75" y2="65" />
+                <path d="M50 35C43 22 30 22 42 35C28 28 30 42 50 35Z" />
+                <path d="M50 35C57 22 70 22 58 35C72 28 70 42 50 35Z" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Free Diptyque Gift Boxes</ServiceText>
+          </ServiceItem>
+
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="18" y="32" width="34" height="48" rx="8" />
+                <rect x="27" y="22" width="16" height="10" />
+                <circle cx="35" cy="15" r="4" />
+                <rect x="24" y="44" width="22" height="22" rx="2" />
+                <rect x="66" y="44" width="14" height="36" rx="2" />
+                <rect x="70" y="39" width="6" height="5" />
+                <circle cx="60" cy="34" r="1.5" fill="black" />
+                <circle cx="53" cy="38" r="1.5" fill="black" />
+                <circle cx="66" cy="26" r="1" fill="black" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Fragrances - Try when you Buy</ServiceText>
+          </ServiceItem>
+
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 25H48L42 75H28L22 25Z" />
+                <line x1="22" y1="32" x2="48" y2="32" />
+                <circle cx="35" cy="50" r="5" />
+                <rect x="58" y="35" width="11" height="40" rx="1.5" />
+                <rect x="73" y="35" width="11" height="40" rx="1.5" />
+                <line x1="58" y1="45" x2="69" y2="45" />
+                <line x1="73" y1="45" x2="84" y2="45" />
+                <path d="M78 25L84 19" />
+                <path d="M63 25L57 19" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Two Free Samples with all orders</ServiceText>
+          </ServiceItem>
+
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="30" y="42" width="40" height="34" rx="2" />
+                <path d="M25 42H75" />
+                <path d="M50 42V76" />
+                <path d="M76 34C83 44 83 58 71 68" strokeDasharray="3 3" />
+                <path d="M24 34C14 47 16 67 34 71" />
+                <path d="M34 64V71H27" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Free Returns</ServiceText>
+          </ServiceItem>
+
+          <ServiceItem>
+            <ServiceCard>
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="42" y="16" width="20" height="36" rx="4" />
+                <rect x="48" y="9" width="8" height="7" />
+                <path d="M15 82C25 77 35 74 45 70C48 67 52 52 48 46" />
+                <path d="M25 87C35 84 48 82 58 76C65 72 68 64 64 56" />
+                <path d="M22 94C32 92 48 90 64 82C75 76 78 66 74 60" />
+              </svg>
+            </ServiceCard>
+            <ServiceText>Welcome Gift: complimentary travel-size fragrance</ServiceText>
+          </ServiceItem>
+        </ServiceGrid>
+      </ServiceSection>
+
+      {/* ════════════════════════════════
+           6. NEWSLETTER BAR
           ════════════════════════════════ */}
       <NewsBar>
         <NewsContent>
@@ -1178,3 +1277,96 @@ const NewsSubmit = styled.button`
     color: #fff;
   }
 `;
+
+/* ── At Your Service Styles ── */
+const ServiceSection = styled.section<{ $visible: boolean }>`
+  border-bottom: 2px solid #000;
+  padding: 80px 40px;
+  background: #FAF8F5;
+  text-align: center;
+  opacity: ${p => p.$visible ? 1 : 0};
+  transform: ${p => p.$visible ? 'translateY(0)' : 'translateY(30px)'};
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+`;
+
+const ServiceTitle = styled.h2`
+  font-family: ${p => p.theme.fonts.display};
+  font-size: 38px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 56px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+`;
+
+const ServiceGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 20px;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 12px;
+  }
+`;
+
+const ServiceItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ServiceCard = styled.div`
+  border: 2px solid #000;
+  border-radius: 60px;
+  width: 120px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  margin-bottom: 18px;
+  box-sizing: border-box;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 140px;
+    border-radius: 50px;
+  }
+`;
+
+const ServiceText = styled.p`
+  font-size: 11px;
+  line-height: 1.5;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
+  max-width: 140px;
+  word-break: keep-all;
+  text-align: center;
+`;
+
