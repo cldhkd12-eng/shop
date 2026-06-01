@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
   const handleSocialClick = (platform: string) => {
     if (platform === 'naver') {
       const clientId = '5DBu8o1B7WyOCPa3uBYB';
-      const redirectUri = encodeURIComponent(window.location.origin + '/#/login/social-popup?platform=naver');
+      const redirectUri = encodeURIComponent(window.location.origin + '/social-callback.html?platform=naver');
       const state = Math.random().toString(36).substring(2);
       localStorage.setItem('naver_state', state);
       const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
@@ -52,7 +52,7 @@ export const Login: React.FC = () => {
 
     if (platform === 'kakao') {
       const clientId = '3b01d1cfd2249b7fd70616bbdd18a98f';
-      const redirectUri = encodeURIComponent(window.location.origin + '/#/login/social-popup?platform=kakao');
+      const redirectUri = encodeURIComponent(window.location.origin + '/social-callback.html?platform=kakao');
       const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
 
       const width = 450;

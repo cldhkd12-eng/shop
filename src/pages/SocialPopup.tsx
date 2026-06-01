@@ -58,7 +58,7 @@ export const SocialPopup: React.FC = () => {
       const body = new URLSearchParams({
         grant_type: 'authorization_code',
         client_id: '3b01d1cfd2249b7fd70616bbdd18a98f',
-        redirect_uri: window.location.origin + '/#/login/social-popup?platform=kakao',
+        redirect_uri: window.location.origin + '/social-callback.html?platform=kakao',
         code: code
       });
 
