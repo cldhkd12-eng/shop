@@ -1,5 +1,11 @@
 {
   "buildCommand": "npm run build:deploy",
   "outputDirectory": "dist",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/naver/:path*",
+      "destination": "https://openapi.naver.com/:path*"
+    }
+  ]
 }

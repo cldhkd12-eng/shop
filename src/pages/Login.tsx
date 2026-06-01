@@ -31,12 +31,31 @@ export const Login: React.FC = () => {
   };
 
   const handleSocialClick = (platform: string) => {
+    if (platform === 'naver') {
+      const clientId = '5DBu8o1B7WyOCPa3uBYB';
+      const redirectUri = encodeURIComponent(window.location.origin + '/#/login/social-popup?platform=naver');
+      const state = Math.random().toString(36).substring(2);
+      localStorage.setItem('naver_state', state);
+      const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
+      
+      const width = 450;
+      const height = 600;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+      window.open(
+        naverAuthUrl,
+        'naverLoginPopup',
+        `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
+      );
+      return;
+    }
+
     const width = 450;
     const height = 600;
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
     window.open(
-      `/login/social-popup?platform=${platform}`,
+      `/#/login/social-popup?platform=${platform}`,
       `${platform}LoginPopup`,
       `width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=no`
     );

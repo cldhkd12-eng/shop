@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 
@@ -7,12 +7,53 @@ export const SocialPopup: React.FC = () => {
   const platform = searchParams.get('platform') || 'kakao';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Parse token from hash (Naver redirects token in the hash fragment)
+    const hash = window.location.hash;
+    const tokenMatch = hash.match(/access_token=([^&]*)/);
+    const token = tokenMatch ? tokenMatch[1] : null;
+
+    if (token) {
+      setLoading(true);
+      // Call Naver Profile API via Vercel rewrite proxy
+      fetch('/api/naver/v1/nid/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.resultcode === '00' && data.response) {
+          const { name: naverName, email: naverEmail } = data.response;
+          if (window.opener) {
+            window.opener.postMessage(
+              {
+                type: 'SOCIAL_LOGIN_SUCCESS',
+                name: naverName || '네이버 사용자',
+                email: naverEmail || '',
+                platform: 'naver',
+              },
+              window.location.origin
+            );
+            window.close();
+          }
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        console.error('Naver profile fetch error:', err);
+        setLoading(false);
+      });
+    }
+  }, []);
 
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name) return;
 
-    // Send logged-in user info back to opener window
     if (window.opener) {
       window.opener.postMessage(
         {
@@ -30,11 +71,21 @@ export const SocialPopup: React.FC = () => {
   const isKakao = platform === 'kakao';
   const isNaver = platform === 'naver';
 
+  if (loading) {
+    return (
+      <PopupContainer isKakao={false} isNaver={true}>
+        <LoadingCard>
+          <Spinner />
+          <LoadingText>네이버 로그인 처리 중입니다...</LoadingText>
+        </LoadingCard>
+      </PopupContainer>
+    );
+  }
+
   return (
     <PopupContainer isKakao={isKakao} isNaver={isNaver}>
       {isKakao ? (
         <Card>
-          {/* KAKAO LOGIN MOCKUP */}
           <KakaoHeader>
             <KakaoYellowLogo>talk</KakaoYellowLogo>
             <HeaderTitle>Kakao</HeaderTitle>
@@ -80,7 +131,6 @@ export const SocialPopup: React.FC = () => {
         </Card>
       ) : isNaver ? (
         <Card>
-          {/* NAVER LOGIN MOCKUP */}
           <NaverHeader>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
               <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
@@ -129,7 +179,6 @@ export const SocialPopup: React.FC = () => {
         </Card>
       ) : (
         <Card>
-          {/* GOOGLE LOGIN MOCKUP */}
           <GoogleHeader>
             <GoogleLogoSvg viewBox="0 0 24 24">
               <path
@@ -185,6 +234,39 @@ export const SocialPopup: React.FC = () => {
 };
 
 /* ─── STYLED COMPONENTS ─── */
+const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+const Spinner = styled.div`
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(3, 199, 90, 0.1);
+  border-top-color: #03C75A;
+  border-radius: 50%;
+  animation: ${rotate} 1s infinite linear;
+  margin: 0 auto 16px;
+`;
+
+const LoadingCard = styled.div`
+  background: white;
+  padding: 40px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #EAEAEA;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+`;
+
+const LoadingText = styled.p`
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  font-weight: 500;
+`;
+
 const PopupContainer = styled.div<{ isKakao: boolean; isNaver: boolean }>`
   width: 100%;
   min-height: 100vh;
