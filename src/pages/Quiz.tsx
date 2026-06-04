@@ -75,7 +75,7 @@ export const Quiz: React.FC = () => {
           <HeaderBrand>Sniff Quiz</HeaderBrand>
         </HeaderLeft>
         <HeaderCenter>
-          ScentAtelier의 AI 조향사가 5가지 간단한 질문을 통해 당신이 사랑하게 될 4가지 향수를 제안합니다.
+          MODO의 AI 조향사가 5가지 간단한 질문을 통해 당신이 사랑하게 될 4가지 향수를 제안합니다.
         </HeaderCenter>
         <HeaderRight onClick={() => navigate('/')}>
           ✕
@@ -98,7 +98,7 @@ export const Quiz: React.FC = () => {
         ) : (
           <ResultsWrapper>
             <ResultsTitle>당신을 위한 4가지 향수 추천</ResultsTitle>
-            <ResultsSubtitle>선택하신 취향을 기반으로 조향한 ScentAtelier의 추천 리스트입니다.</ResultsSubtitle>
+            <ResultsSubtitle>선택하신 취향을 기반으로 조향한 MODO의 추천 리스트입니다.</ResultsSubtitle>
             <ProductsGrid>
               {getRecommendations().map((prod) => (
                 <ProductCard key={prod.id} onClick={() => navigate(`/detail/${prod.id}`)}>

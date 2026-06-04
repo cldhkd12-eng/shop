@@ -126,7 +126,7 @@ export const Cart: React.FC = () => {
             {Object.keys(groupedItems).map(brand => (
               <VendorGroup key={brand}>
                 <VendorHead>
-                  <VendorNameTag>FORMENT OFFICIAL STORE</VendorNameTag>
+                  <VendorNameTag>MODO OFFICIAL STORE</VendorNameTag>
                   <VendorShip>
                     무료배송
                   </VendorShip>
@@ -221,16 +221,17 @@ export const Cart: React.FC = () => {
   );
 };
 
-/* ─── STYLED COMPONENTS ─── */
 const PageContainer = styled.div`
   width: 100%;
   min-height: 80vh;
   padding-bottom: 80px;
+  background: #0a0a0f;
+  color: #f0ede8;
 `;
 
 const PageHeader = styled.div`
-  background: ${props => props.theme.colors.white};
-  border-bottom: 1px solid ${props => props.theme.colors.gray200};
+  background: #0d0d14;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 40px 24px 0;
 `;
 
@@ -240,24 +241,25 @@ const PageHeaderInner = styled.div`
 `;
 
 const PageBreadcrumb = styled.div`
-  font-family: ${props => props.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
-  font-weight: 700;
-  color: ${props => props.theme.colors.gray400};
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
   margin-bottom: 10px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 
   span {
-    color: ${props => props.theme.colors.navy};
+    color: #c8a97e;
   }
 `;
 
 const PageH1 = styled.h1`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 28px;
-  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
   margin-bottom: 30px;
-  color: ${props => props.theme.colors.navy};
+  color: #f0ede8;
 `;
 
 const EmptyCart = styled.div`
@@ -265,9 +267,9 @@ const EmptyCart = styled.div`
   margin: 100px auto;
   text-align: center;
   padding: 60px 40px;
-  background: ${props => props.theme.colors.white};
-  border: 2px solid #000000;
-  border-radius: 0px;
+  background: #0d0d14;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
 `;
 
 const EmptyIcon = styled.div`
@@ -277,26 +279,26 @@ const EmptyIcon = styled.div`
 
 const EmptyText = styled.div`
   font-size: 16px;
-  font-weight: 800;
-  color: ${props => props.theme.colors.navy};
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 30px;
 `;
 
 const ShopBtn = styled.button`
   padding: 16px 36px;
-  background: #000000;
-  color: #FFFFFF;
-  border: 2px solid #000000;
-  border-radius: 0px;
-  font-family: ${props => props.theme.fonts.display};
+  background: #c8a97e;
+  color: #0a0a0f;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
-  transition: ${props => props.theme.transition};
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #FFFFFF;
-    color: #000000;
+    background: #dcb88f;
+    transform: translateY(-2px);
   }
 `;
 
@@ -305,11 +307,11 @@ const CartLayout = styled.div`
   margin: 0 auto;
   padding: 60px 24px;
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 400px;
   gap: 48px;
   align-items: start;
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 40px 16px;
@@ -317,55 +319,65 @@ const CartLayout = styled.div`
 `;
 
 const VendorGroup = styled.div`
-  background: ${props => props.theme.colors.white};
-  border: 2px solid #000000;
-  border-radius: 0px;
+  background: #0d0d14;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px;
 `;
 
 const VendorHead = styled.div`
-  padding: 16px 24px;
-  background: #FFFFFF;
-  border-bottom: 2px solid #000000;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 const VendorNameTag = styled.span`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 11px;
-  font-weight: 900;
-  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c8a97e;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
 `;
 
 const VendorShip = styled.span`
   font-size: 11px;
-  font-weight: 900;
-  color: #000000;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
   letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
 `;
 
 const CartItem = styled.div`
-  padding: 24px;
+  padding: 28px 24px;
   display: flex;
-  gap: 20px;
-  align-items: start;
-  border-bottom: 1px solid ${props => props.theme.colors.gray100};
+  gap: 24px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 
   &:last-child {
     border-bottom: none;
   }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 `;
 
 const CartItemImg = styled.div`
-  width: 90px;
-  height: 90px;
-  background: ${props => props.theme.colors.linenWarm};
-  border: 2px solid #000000;
-  border-radius: 0px;
+  width: 100px;
+  height: 100px;
+  background: #15151f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -378,100 +390,110 @@ const CartItemInfo = styled.div`
 `;
 
 const CartItemBrand = styled.div`
-  font-family: ${props => props.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: ${props => props.theme.colors.gray400};
+  color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 `;
 
 const CartItemName = styled.div`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 4px;
-  color: ${props => props.theme.colors.navy};
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 6px;
+  color: #f0ede8;
 `;
 
 const CartItemOpt = styled.div`
   font-size: 12px;
-  color: ${props => props.theme.colors.gray600};
+  color: rgba(255, 255, 255, 0.45);
 `;
 
 const CartItemRight = styled.div`
   text-align: right;
-  min-width: 120px;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
 `;
 
 const CartItemPrice = styled.div`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: ${props => props.theme.colors.navy};
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #c8a97e;
 `;
 
 const CartQty = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  justify-content: flex-end;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
 `;
 
 const Cqb = styled.button`
   width: 32px;
   height: 32px;
-  border: 2px solid #000000;
-  border-radius: 0px;
-  background: ${props => props.theme.colors.white};
+  border: none;
+  background: transparent;
   cursor: pointer;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.colors.navy};
-  transition: ${props => props.theme.transition};
-  font-weight: 800;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s;
 
   &:hover {
-    background: #000000;
-    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f0ede8;
   }
 `;
 
 const Cqn = styled.span`
-  font-family: ${props => props.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  font-weight: 800;
-  min-width: 24px;
+  font-weight: 500;
+  min-width: 32px;
   text-align: center;
-  color: ${props => props.theme.colors.navy};
+  color: #f0ede8;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
 `;
 
 const CartDel = styled.span`
-  font-family: ${props => props.theme.fonts.display};
-  font-weight: 800;
-  color: ${props => props.theme.colors.gray400};
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
   font-size: 10px;
   letter-spacing: 0.05em;
   cursor: pointer;
-  margin-top: 12px;
-  display: inline-block;
+  transition: color 0.2s;
   border-bottom: 1px solid transparent;
-  transition: ${props => props.theme.transition};
 
   &:hover {
-    color: #000000;
-    border-color: #000000;
+    color: #ff5a5a;
+    border-color: #ff5a5a;
   }
 `;
 
 const SummaryBox = styled.div`
-  background: ${props => props.theme.colors.white};
-  border: 2px solid #000000;
-  border-radius: 0px;
+  background: #0d0d14;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
   position: sticky;
   top: 100px;
   overflow: hidden;
@@ -482,16 +504,17 @@ const SummaryBox = styled.div`
 `;
 
 const SummaryHead = styled.div`
-  background: #000000;
+  background: #111118;
   padding: 20px 24px;
-  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 `;
 
 const SummaryHeadTitle = styled.div`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 14px;
-  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0.1em;
+  color: #f0ede8;
 `;
 
 const SummaryBody = styled.div`
@@ -502,23 +525,22 @@ const SummaryRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 2px solid #EAEAEA;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 13px;
 
   .label {
-    color: ${props => props.theme.colors.gray600};
-    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .val {
-    font-family: ${props => props.theme.fonts.display};
-    font-weight: 800;
-    color: ${props => props.theme.colors.navy};
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #f0ede8;
   }
 
   .val.discount {
-    color: #FF0000;
+    color: #ff5a5a;
   }
 `;
 
@@ -526,44 +548,43 @@ const SummaryTotal = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-top: 2.5px solid #000000;
+  padding: 24px 0 12px;
   margin-top: 12px;
 `;
 
 const TotalLabel = styled.span`
-  font-size: 13px;
-  font-weight: 800;
-  color: ${props => props.theme.colors.navy};
+  font-size: 14px;
+  font-weight: 500;
+  color: #f0ede8;
 `;
 
 const TotalVal = styled.span`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 24px;
-  font-weight: 900;
-  color: ${props => props.theme.colors.navy};
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: #c8a97e;
 `;
 
 const TossBtn = styled.button`
   display: block;
   width: 100%;
   padding: 18px;
-  background: #000000;
-  color: #FFFFFF;
-  border: 2px solid #000000;
-  border-radius: 0px;
-  font-family: ${props => props.theme.fonts.display};
+  background: #c8a97e;
+  color: #0a0a0f;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: ${props => props.theme.transition};
-  margin-top: 20px;
+  transition: all 0.3s ease;
+  margin-top: 24px;
   text-align: center;
 
   &:hover {
-    background: #FFFFFF;
-    color: #000000;
+    background: #dcb88f;
+    transform: translateY(-2px);
   }
 `;
 
@@ -572,33 +593,33 @@ const TossLogo = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  color: #0a0a0f;
 
   .toss-badge {
-    color: #3182F6;
-    font-weight: 950;
+    font-weight: 800;
   }
 `;
 
 const DeliveryForm = styled.div`
-  border: 2px solid #000000;
-  border-radius: 0px;
-  padding: 16px;
-  margin-bottom: 20px;
-  background: ${props => props.theme.colors.linen};
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.01);
 `;
 
 const DeliveryTitle = styled.div`
-  font-family: ${props => props.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.05em;
-  margin-bottom: 14px;
-  color: ${props => props.theme.colors.navy};
+  margin-bottom: 16px;
+  color: #c8a97e;
   text-transform: uppercase;
 `;
 
 const FormField = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 
   &:last-child {
     margin-bottom: 0;
@@ -607,27 +628,26 @@ const FormField = styled.div`
   label {
     display: block;
     font-size: 10px;
-    font-weight: 800;
-    color: ${props => props.theme.colors.gray600};
-    margin-bottom: 4px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   input {
     width: 100%;
-    padding: 10px 12px;
-    border: 2px solid #000000;
-    border-radius: 0px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     font-size: 13px;
-    font-family: ${props => props.theme.fonts.body};
     outline: none;
-    background: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.navy};
-    transition: ${props => props.theme.transition};
+    background: #15151f;
+    color: #f0ede8;
+    transition: border-color 0.2s;
 
     &:focus {
-      background: #FFFFFF;
+      border-color: #c8a97e;
     }
   }
 `;

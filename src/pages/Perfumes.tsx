@@ -71,7 +71,7 @@ export const Perfumes: React.FC = () => {
 
       {/* ══ HERO HEADER ══ */}
       <HeroHeader ref={headerReveal.ref} $visible={headerReveal.visible}>
-        <HeroEyebrow>SCENT ATELIER COLLECTION</HeroEyebrow>
+        <HeroEyebrow>MODO COLLECTION</HeroEyebrow>
         <HeroTitle>PERFUMES</HeroTitle>
         <HeroMeta>
           <HeroCount>{filteredProducts.length} SCENTS</HeroCount>
@@ -155,18 +155,18 @@ export const Perfumes: React.FC = () => {
   );
 };
 
-/* ─── STYLED COMPONENTS ─── */
 const PageContainer = styled.div`
   width: 100%;
-  background: #FAF8F5;
-  color: #000;
+  background: #0a0a0f;
+  color: #f0ede8;
   min-height: 100vh;
 `;
 
 /* ── Hero Header ── */
 const HeroHeader = styled.div<{ $visible: boolean }>`
   padding: 64px 60px 40px;
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0d0d14;
   opacity: ${p => p.$visible ? 1 : 0};
   transform: ${p => p.$visible ? 'translateY(0)' : 'translateY(24px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -175,22 +175,22 @@ const HeroHeader = styled.div<{ $visible: boolean }>`
 `;
 
 const HeroEyebrow = styled.div`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.3em;
-  color: #999;
+  color: rgba(255, 255, 255, 0.35);
   margin-bottom: 16px;
   text-transform: uppercase;
 `;
 
 const HeroTitle = styled.h1`
-  font-family: ${p => p.theme.fonts.display};
-  font-size: clamp(56px, 10vw, 120px);
-  font-weight: 900;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(56px, 10vw, 110px);
+  font-weight: 300;
   letter-spacing: -0.04em;
   line-height: 0.9;
-  color: #000;
+  color: #f0ede8;
   margin: 0 0 28px 0;
   text-transform: uppercase;
 `;
@@ -202,51 +202,51 @@ const HeroMeta = styled.div`
 `;
 
 const HeroCount = styled.span`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.2em;
-  color: #000;
+  color: #f0ede8;
 `;
 
 const HeroDivider = styled.span`
   width: 24px;
   height: 1px;
-  background: #999;
+  background: rgba(255, 255, 255, 0.15);
 `;
 
 const HeroDesc = styled.span`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.12em;
-  color: #999;
+  color: rgba(255, 255, 255, 0.35);
 `;
 
 /* ── Filter Bar ── */
 const FilterBar = styled.div`
   display: grid;
   grid-template-columns: 200px 1fr;
-  border-bottom: 2px solid #000;
-  background: #FAF8F5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0d0d14;
 
   @media (max-width: 900px) { grid-template-columns: 1fr; }
 `;
 
 const FilterLabel = styled.div`
   padding: 18px 32px;
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.2em;
-  border-right: 2px solid #000;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
-  color: #000;
+  color: #f0ede8;
 
   @media (max-width: 900px) {
     border-right: none;
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding: 14px 20px;
   }
 `;
@@ -263,7 +263,7 @@ const ActiveUnderline = styled.span`
   bottom: 0;
   left: 0;
   height: 2px;
-  background: #000;
+  background: #c8a97e;
   animation: ${revealWidth} 0.25s ease forwards;
   width: 100%;
 `;
@@ -272,24 +272,25 @@ const TabBtn = styled.button<{ $active: boolean }>`
   position: relative;
   flex: 1;
   padding: 18px 16px;
-  background: ${p => p.$active ? '#000' : 'transparent'};
+  background: ${p => p.$active ? 'rgba(255,255,255,0.03)' : 'transparent'};
   border: none;
-  border-right: 2px solid #000;
-  font-family: ${p => p.theme.fonts.display};
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'Inter', sans-serif;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.1em;
-  color: ${p => p.$active ? '#fff' : '#000'};
+  color: ${p => p.$active ? '#c8a97e' : 'rgba(255,255,255,0.4)'};
   cursor: pointer;
   white-space: nowrap;
   text-transform: uppercase;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: all 0.25s ease;
   overflow: hidden;
 
   &:last-child { border-right: none; }
 
   &:hover {
-    background: ${p => p.$active ? '#000' : '#EDE7DC'};
+    background: rgba(200, 169, 126, 0.05);
+    color: #c8a97e;
   }
 
   @media (max-width: 900px) { padding: 14px 12px; }
@@ -299,7 +300,7 @@ const TabBtn = styled.button<{ $active: boolean }>`
 const CatalogGrid = styled.div<{ $visible: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   opacity: ${p => p.$visible ? 1 : 0};
   transition: opacity 0.7s ease;
 
@@ -308,11 +309,11 @@ const CatalogGrid = styled.div<{ $visible: boolean }>`
 `;
 
 const ProductCard = styled.div<{ $delay: number; $visible: boolean; }>`
-  border-right: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   aspect-ratio: 0.8;
-  background: #FAF8F5;
+  background: #0a0a0f;
   cursor: pointer;
   overflow: hidden;
   display: flex;
@@ -325,13 +326,13 @@ const ProductCard = styled.div<{ $delay: number; $visible: boolean; }>`
               background 0.3s ease;
 
   &:hover {
-    background: #F0EAE0;
+    background: #0e0e16;
   }
 
   &:nth-child(3n) { border-right: none; }
 
   @media (max-width: 1100px) {
-    &:nth-child(3n) { border-right: 2px solid #000; }
+    &:nth-child(3n) { border-right: 1px solid rgba(255, 255, 255, 0.06); }
     &:nth-child(2n) { border-right: none; }
   }
   @media (max-width: 640px) {
@@ -345,11 +346,11 @@ const ExclusiveBadge = styled.span`
   position: absolute;
   top: 20px;
   left: 0;
-  background: #0F5CA8;
+  background: #1c2a38;
   color: #fff;
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.1em;
   padding: 6px 14px;
   z-index: 10;
@@ -360,11 +361,11 @@ const DefaultBadge = styled.span<{ $type: string }>`
   position: absolute;
   top: 20px;
   right: 0;
-  background: ${p => p.$type === 'NEW' ? '#000' : p.$type === 'SALE' ? '#C0392B' : '#5E4B8B'};
+  background: ${p => p.$type === 'NEW' ? '#c8a97e' : p.$type === 'SALE' ? '#993333' : '#3d315b'};
   color: #fff;
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 8px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.12em;
   padding: 5px 12px;
   z-index: 10;
@@ -380,7 +381,7 @@ const ImgWrapper = styled.div`
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   ${ProductCard}:hover & {
-    transform: scale(1.07) translateY(-6px);
+    transform: scale(1.06) translateY(-6px);
   }
 `;
 
@@ -388,7 +389,7 @@ const ProductImg = styled.img<{ $hovered: boolean }>`
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: ${p => p.$hovered ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.18))' : 'drop-shadow(0 8px 16px rgba(0,0,0,0.06))'};
+  filter: ${p => p.$hovered ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' : 'drop-shadow(0 8px 16px rgba(0,0,0,0.2))'};
   transition: filter 0.4s ease;
 `;
 
@@ -401,7 +402,7 @@ const CardShimmer = styled.div<{ $hovered: boolean }>`
   background: linear-gradient(
     105deg,
     transparent 20%,
-    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.06) 50%,
     transparent 80%
   );
   pointer-events: none;
@@ -418,28 +419,28 @@ const InfoOverlay = styled.div`
 `;
 
 const BrandName = styled.div`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.18em;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
   margin-bottom: 4px;
 `;
 
 const ProductName = styled.h3`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: clamp(18px, 2vw, 22px);
-  font-weight: 900;
+  font-weight: 300;
   line-height: 1.1;
-  color: #000;
+  color: #f0ede8;
   margin: 0 0 6px 0;
 `;
 
 const ScentDescription = styled.div`
   font-size: 10px;
-  color: #888;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
   letter-spacing: 0.02em;
   margin-bottom: 10px;
   word-break: keep-all;
@@ -452,18 +453,18 @@ const PriceRow = styled.div`
 `;
 
 const ProductPrice = styled.div`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  font-weight: 800;
-  color: #000;
+  font-weight: 500;
+  color: #c8a97e;
 `;
 
 const QuickViewHint = styled.span<{ $hovered: boolean }>`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: #000;
+  color: #c8a97e;
   opacity: ${p => p.$hovered ? 1 : 0};
   transform: ${p => p.$hovered ? 'translateX(0)' : 'translateX(-8px)'};
   transition: opacity 0.25s ease, transform 0.25s ease;
@@ -476,10 +477,10 @@ const BottomStrip = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 40px 60px;
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   gap: 24px;
   flex-wrap: wrap;
-  background: #000;
+  background: #0d0d14;
 
   @media (max-width: 768px) { padding: 32px 24px; }
 `;
@@ -491,19 +492,19 @@ const BottomLeft = styled.div`
 `;
 
 const BottomCount = styled.span`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
 `;
 
 const BottomLine = styled.span`
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
 `;
 
 const BottomRight = styled.div``;
@@ -515,24 +516,25 @@ const Arrow = styled.span`
 
 const QuizFloatingBtn = styled.button`
   background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.4);
-  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(200, 169, 126, 0.4);
+  color: #c8a97e;
   padding: 14px 28px;
-  font-family: ${p => p.theme.fonts.display};
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.12em;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
   text-transform: uppercase;
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  transition: all 0.25s ease;
+  border-radius: 8px;
 
   &:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.8);
-    color: #fff;
+    background: rgba(200, 169, 126, 0.08);
+    border-color: rgba(200, 169, 126, 0.8);
+    color: #dcb88f;
     ${Arrow} { transform: translateX(4px); }
   }
 `;

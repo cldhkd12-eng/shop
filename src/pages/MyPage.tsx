@@ -35,7 +35,7 @@ export const MyPage: React.FC = () => {
 
   // Mock inquiries logs
   const supportInquiries = [
-    { date: '2026-05-27', title: '향수 보틀 패키지 선물용 추가 문의', status: '답변완료', answer: '안녕하세요, 센트아틀리에입니다. 시그니처 크래프트 리본 포장이 동봉되어 배송되었습니다. 감사합니다.' },
+    { date: '2026-05-27', title: '향수 보틀 패키지 선물용 추가 문의', status: '답변완료', answer: '안녕하세요, MODO입니다. 시그니처 크래프트 리본 포장이 동봉되어 배송되었습니다. 감사합니다.' },
     { date: '2026-05-28', title: 'Debaser 향수 100ml 재입고 문의', status: '답변대기', answer: null },
   ];
 
@@ -57,7 +57,7 @@ export const MyPage: React.FC = () => {
     <PageContainer className="fade-in">
       <HeaderSection>
         <Title>마이페이지</Title>
-        <Subtitle>센트아틀리에 멤버십 회원을 위한 대시보드입니다.</Subtitle>
+        <Subtitle>MODO 멤버십 회원을 위한 대시보드입니다.</Subtitle>
       </HeaderSection>
 
       <MyPageLayout>
@@ -208,7 +208,7 @@ export const MyPage: React.FC = () => {
                     <InquiryTitle>Q. {inq.title}</InquiryTitle>
                     {inq.answer ? (
                       <InquiryAnswer>
-                        <strong>A. 센트아틀리에 답변:</strong> {inq.answer}
+                        <strong>A. MODO 답변:</strong> {inq.answer}
                       </InquiryAnswer>
                     ) : (
                       <InquiryAnswerPending>

@@ -47,11 +47,7 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
 export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    { product: initialProducts[0], quantity: 1, option: '100ml' }, // Santal 33
-    { product: initialProducts[3], quantity: 1, option: '100ml' }, // Bleu de Chanel
-    { product: initialProducts[4], quantity: 2, option: '50ml' },  // Miss Dior
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<OrderItem[]>(initialOrders);
   const [reports, setReports] = useState<ReportItem[]>(initialReports);
   const [vendors, setVendors] = useState<VendorItem[]>(initialVendors);

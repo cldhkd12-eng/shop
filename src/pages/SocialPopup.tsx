@@ -156,7 +156,7 @@ export const SocialPopup: React.FC = () => {
             <AppInfo>
               <AppIcon>SA</AppIcon>
               <AppText>
-                <strong>ScentAtelier</strong>에서<br />
+                <strong>MODO</strong>에서<br />
                 아래 권한을 요청합니다.
               </AppText>
             </AppInfo>
@@ -203,7 +203,7 @@ export const SocialPopup: React.FC = () => {
             <AppInfo>
               <AppIcon>SA</AppIcon>
               <AppText>
-                <strong>ScentAtelier</strong>에서<br />
+                <strong>MODO</strong>에서<br />
                 아래 권한을 요청합니다.
               </AppText>
             </AppInfo>
@@ -260,7 +260,7 @@ export const SocialPopup: React.FC = () => {
               />
             </GoogleLogoSvg>
             <HeaderTitle style={{ marginTop: '8px' }}>Google 계정으로 로그인</HeaderTitle>
-            <HeaderSub>ScentAtelier으로 이동</HeaderSub>
+            <HeaderSub>MODO으로 이동</HeaderSub>
           </GoogleHeader>
 
           <Body>

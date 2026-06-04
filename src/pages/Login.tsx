@@ -84,7 +84,7 @@ export const Login: React.FC = () => {
         <FormHeader>
           <WelcomeLabel>어서오세요</WelcomeLabel>
           <FormTitle>로그인</FormTitle>
-          <FormSubtitle>센트아틀리에 멤버십으로 특별한 혜택을 누리세요</FormSubtitle>
+          <FormSubtitle>MODO 멤버십으로 특별한 혜택을 누리세요</FormSubtitle>
         </FormHeader>
 
         <Form onSubmit={handleSubmit}>

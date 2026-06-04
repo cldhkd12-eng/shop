@@ -14,58 +14,27 @@ export const Header: React.FC = () => {
     return null;
   }
 
-  const isAdmin = location.pathname.startsWith('/admin') || location.pathname.startsWith('/vendor');
-
-  const navTabs = isAdmin
-    ? [
-        { label: '대시보드', path: '/admin?tab=dashboard' },
-        { label: '상품등록', path: '/admin?tab=products' },
-        { label: '정산관리', path: '/admin?tab=tax' },
-        { label: '고객관리', path: '/admin?tab=customers' },
-      ]
-    : [
-        { label: 'SHOP ALL', path: '/' },
-        { label: 'PERFUMES', path: '/perfumes' },
-        { label: 'CART BOX', path: '/cart' },
-        { label: '브랜드', path: '/brand' },
-        { label: '고객센터', path: '/support' },
-      ];
-
   return (
     <Nav>
       <NavInner>
-        <Logo onClick={() => navigate('/')}>
-          ScentAtelier
-        </Logo>
-        <NavTabs>
-          {navTabs.map(tab => {
-            const currentFull = location.pathname + location.search;
-            const isActive = tab.path.includes('?') 
-              ? currentFull === tab.path || (currentFull === '/admin' && tab.path === '/admin?tab=dashboard')
-              : location.pathname === tab.path;
-            return (
-              <NavTab
-                key={tab.label}
-                className={isActive ? 'active' : ''}
-                $isActive={isActive}
-                onClick={() => navigate(tab.path)}
-              >
-                {tab.label}
-              </NavTab>
-            );
-          })}
-        </NavTabs>
+        <NavLeft>
+          <MinimalTab onClick={() => navigate('/perfumes')}>Shop</MinimalTab>
+          <MinimalTab onClick={() => navigate('/brand')}>Brand</MinimalTab>
+          <MinimalTab onClick={() => navigate('/support')}>Support</MinimalTab>
+        </NavLeft>
+        
+        <LogoContainer>
+          <Logo onClick={() => navigate('/')}>MODO.</Logo>
+        </LogoContainer>
+        
         <NavActions>
-          <NavIcon onClick={() => navigate('/cart')}>
-            장바구니({totalCartCount})
-          </NavIcon>
+          <MinimalAction onClick={() => navigate('/cart')}>
+            Cart({totalCartCount})
+          </MinimalAction>
           {user.isLoggedIn ? (
-            <UserSection>
-              <UserName onClick={() => navigate('/mypage')}>{user.name.toUpperCase()} (MY)</UserName>
-              <LogoutBtn onClick={logout}>로그아웃</LogoutBtn>
-            </UserSection>
+            <MinimalAction onClick={logout}>Logout</MinimalAction>
           ) : (
-            <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
+            <MinimalAction onClick={() => navigate('/login')}>Login</MinimalAction>
           )}
         </NavActions>
       </NavInner>
@@ -79,151 +48,85 @@ const Nav = styled.nav`
   top: 0;
   z-index: 100;
   background: #FFFFFF;
-  border-bottom: 2px solid #000000;
+  /* Removed heavy bottom border for minimal aesthetic */
+  padding: 10px 0;
 `;
 
 const NavInner = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  height: 80px;
+  height: 60px;
 
   @media (max-width: 900px) {
     padding: 0 20px;
-    height: 60px;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
-const Logo = styled.div`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 22px;
-  font-weight: 900;
-  color: #000000;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  white-space: nowrap;
-`;
-
-const NavTabs = styled.div`
+const NavLeft = styled.div`
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
 
   @media (max-width: 900px) {
-    display: none; // Minimal architecture hides GNB in mobile
+    display: none;
   }
 `;
 
-const NavTab = styled.button<{ $isActive: boolean }>`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  color: #000000;
+const MinimalTab = styled.button`
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #000;
   background: transparent;
-  cursor: pointer;
   border: none;
-  padding: 8px 0;
-  position: relative;
-  transition: opacity 0.15s ease;
-  opacity: ${props => (props.$isActive ? 1 : 0.6)};
-
+  cursor: pointer;
+  padding: 0;
+  
   &:hover {
-    opacity: 1;
+    opacity: 0.6;
   }
+`;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #000000;
-    transform: ${props => (props.$isActive ? 'scaleX(1)' : 'scaleX(0)')};
-    transition: transform 0.15s ease;
-  }
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
-  &:hover::after {
-    transform: scaleX(1);
-  }
+const Logo = styled.div`
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  /* Flipping the logo 180 degrees to match the image style */
+  transform: rotate(180deg);
+  display: inline-block;
+  line-height: 1;
 `;
 
 const NavActions = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
   gap: 24px;
+  align-items: center;
 `;
 
-const NavIcon = styled.button`
+const MinimalAction = styled.button`
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #000;
   background: transparent;
   border: none;
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
   cursor: pointer;
-  color: #000000;
+  padding: 0;
 
   &:hover {
-    text-decoration: underline;
+    opacity: 0.6;
   }
 `;
 
-const UserSection = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-
-const UserName = styled.span`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #000000;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const LoginBtn = styled.button`
-  background: #000000;
-  color: #FFFFFF;
-  border: 2px solid #000000;
-  padding: 10px 20px;
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  border-radius: 0px;
-
-  &:hover {
-    background: #FFFFFF;
-    color: #000000;
-  }
-`;
-
-const LogoutBtn = styled.button`
-  background: transparent;
-  color: #000000;
-  border: 2px solid #000000;
-  padding: 10px 20px;
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  border-radius: 0px;
-
-  &:hover {
-    background: #000000;
-    color: #FFFFFF;
-  }
-`;

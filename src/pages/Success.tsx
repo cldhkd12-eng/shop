@@ -54,7 +54,7 @@ export const Success: React.FC = () => {
       <SuccessCard>
         <CheckIcon>🎉</CheckIcon>
         <Heading>결제가 완료되었습니다</Heading>
-        <SubHeading>ScentAtelier를 이용해 주셔서 대단히 감사합니다.</SubHeading>
+        <SubHeading>MODO를 이용해 주셔서 대단히 감사합니다.</SubHeading>
 
         <ReceiptTable>
           <tbody>
